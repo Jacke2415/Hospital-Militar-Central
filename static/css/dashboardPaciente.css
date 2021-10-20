@@ -1,0 +1,114 @@
+*{
+    box-sizing: border-box;
+    font-family:'Montserrat', sans-serif;
+}
+
+body {
+    /*background: url(img/cover.jpg);*/
+    background-color: #efefef;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size:100%;
+    background-attachment:initial;
+}
+form{
+    font-size: x-large;
+    position:relative;
+    left:15%;
+    top: 5%;
+}
+input[type="search"]{
+    font-size: 20px;
+    width: 30%;
+    padding: 10px;
+    border: none;
+}
+p{
+    text-align: left;
+}
+.contenedor-imagen{
+    text-decoration-color: #1a2537;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+}
+img{
+    margin-left: 5%;
+    width: 200px;
+    overflow:auto;
+}
+.contenedor-id{
+    font-weight: bold;
+    text-decoration-color: #1a2537;
+    margin-left: 8%;
+    width: 35%;
+    height: 100%;
+    padding: 30px;
+    border: 3px solid #1a2537;
+}
+.contenedor-citas-pendientes{
+    position:relative;
+    top: -630px;
+    left: 60%;
+}
+.contenedor-historia-clinica{
+    position:relative;
+    top: -630px;
+    left: 55%;
+}
+.button{
+    margin-top: 2%;
+    margin-left: auto;
+    border: none;
+    width:auto;
+    color: white;
+    font-size: 20px;
+    background:  #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button1{
+    margin-top: 1%;
+    margin-left: auto;
+    border: none;
+    width:auto;
+    color: white;
+    font-size: 20px;
+    background:  #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover, .button1:hover{
+    background: cadetblue;
+}
+table{   
+    margin-left: -5%;
+    width:35%;
+    text-align:center;
+    background-origin: padding-box;
+    box-sizing: content-box;
+    border-collapse: collapse;    
+}
+th, td{
+    border: 2px solid #1a2537;
+}
+caption{
+    text-align: center;
+    font-weight: bold;
+    border-top: 2px solid #1a2537;
+    border-left: 2px solid #1a2537;
+    border-right: 2px solid #1a2537;
+}
+p.box1 {
+    width:35%;
+    border: 2px solid #1a2537;
+    margin-top: 3%;
+    
+    padding:150px;
+    font-size:italic;
+    background-color:#fff;
+    color:#1a2537;
+}

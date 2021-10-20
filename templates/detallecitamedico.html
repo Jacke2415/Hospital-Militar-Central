@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Militar Central</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Tipo de letra -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- conexion a css -->
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/detallecitamedicoF.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/perfilmedico.css')}}">
+    <script src="{{ url_for('static', filename = '../static/js/perfilmedico.js') }}"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+    <!-- inicio y señal de busqueda -->
+        <nav>
+            <a href="../principal/index.html" class="btn">Inicio</a>
+            <a href="../Buscar/busquedaf.html" class="btn">
+                <i class="fas fa-search"></i>
+            </a>
+        </nav>
+    <!-- Nombre del medico y especialidad -->
+        <section class="textos-header">
+            <h1>Detalle Cita</h1>
+        </section>
+
+    <!-- Flow del encabezado -->
+        <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #fff;"></path>
+            </svg></div>
+
+    </header>
+
+
+
+    
+    <section class="contenedor-formato-tabla">
+
+        <form action="" method = "GET" name ="detallemedico" class ="formulario-login" onsubmit = "return validarLogin()">
+
+            <div class="contenedor">  
+
+                <h1>Datos</h1>
+        
+                <div class="input-contenedor">
+                    <input type ="text" name ="Nombre" id="nombre" placeholder="Nombre del paciente" disabled="true" >
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Cedula" id="cedula" placeholder="N°de Identificacion" disabled="">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Sexo" id="sexo" placeholder="Sexo" disabled="true">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Edad" id="edad" placeholder="Edad" disabled="true">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Fecha" id="fecha" placeholder="Fecha" disabled="true">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Hora" id="hora" placeholder="Hora" disabled="true">
+                </div>
+        
+
+
+                <input type="submit" value="Aceptar" class="button1">
+                <input type="button" value="Editar" class="button2" onclick="habilitarinputs() ">
+                <input type="submit" value="Cancelar" class="button3">
+
+            </div>
+        </form>
+
+        <div class="contenedor-historia-clinica">
+            <!-- Texto dentro Historia clinica -->
+            <textarea name="historiaclinica" id="textarea" cols="30" rows="10">
+            Hospital Militar Central
+                
+                                    HISTORIA CLINICA
+            </textarea>
+        
+            <input type="submit" value="Ver historia clinica" id="botonhclinica" class="verHistoriaClinica">
+        </div>
+
+        </section>
+
+</body>
+
+<footer>
+    <div class="contenedor-footer">
+        <div class="content-foo">
+            <h4>Phone</h4>
+            <p>........</p>
+        </div>
+        <div class="content-foo">
+            <h4>Email</h4>
+            <p>.......</p>
+        </div>
+        <div class="content-foo">
+            <h4>Location</h4>
+            <p>......</p>
+        </div>
+    </div>
+    <h2 class="titulo-final">&copy; Team 5 Cliclo 3 | Mision Tic</h2>
+</footer>
+</html>

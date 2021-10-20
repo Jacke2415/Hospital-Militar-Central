@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Registro</title> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename = '../static/css/estiloPaciente.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.png') }}">
+</head>
+<body>
+    <form class="principal-paciente" method = "POST">
+        <div class="contenedor">
+            <div class="contenedor-imagen">
+                <h1>{{ user.name }}</h1>
+                <img src="{{ url_for('static', filename = 'img/fotico.jpg') }}">
+            </div>
+            <div class="contenedor-id">
+                <p>Tipo de Identificación: {{ user.tipoId }}</p>
+                <p>Número de Identificación: {{ user.numId }}</p>
+                <p>Sexo: {{ user.sexo }}</p>
+                <p>Edad: {{ user.edad }}</p>
+                <p>Teléfono: {{ user.tel }}</p>
+                <p>Dirección: {{ user.dir }}</p>
+            </div>
+            
+            <div class="contenedor-citas-pendientes">
+                <div class="error">
+                    <h2>{{ error }}</h2>
+                </div>
+                <table>
+                    <caption>Citas Pendientes</caption>
+                    <tr>
+                        {% for item in columnas %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                               
+                    
+                    {% for user in encontradas %}
+                    <tr>
+                        {% for  item in user %}
+                        <td>{{ item }}</td> 
+                        {% endfor %} 
+                    </tr>
+                    {% endfor %}
+                </table>
+                
+                <input type="" value="Solicitar Cita" class="button" onclick = 
+                "location='/inicio/iniciarSesion/Paciente/solicitarcita'"/>
+                <input type="" value="Cancelar Cita" class="button" onclick = 
+                "location='/inicio/iniciarSesion/Paciente/Cancelarcita'"/>
+                </div>
+    
+            <div class="contenedor-historial-citas">
+                <table>
+                    <caption>Historial de Citas</caption>
+                    <tr>
+                        {% for item in columnas %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                               
+                    
+                    {% for user in historial %}
+                    <tr>
+                        {% for  item in user %}
+                        <td>{{ item }}</td> 
+                        {% endfor %} 
+                    </tr>
+                    {% endfor %}
+
+                        
+                </table>
+    
+                <input type="submit" value="Solicitar Historia Clínica" class="button">
+            </div>
+        </div>
+    </form>
+</body>
+</html>

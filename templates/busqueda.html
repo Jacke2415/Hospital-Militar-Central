@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Militar Central</title>
+    <script src="./js/busqueda.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <!-- Tipo de letra -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- conexion a css -->
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/busqueda.css')}}">
+    <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="/inicio" class="btn">Inicio</a>
+
+        </nav>
+        <section class="textos-header">
+            <h1>¿Como podemos ayudarte?</h1>
+
+        </section>
+        <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #fff;"></path>
+            </svg></div>
+    </header>
+
+    <!--Main Page-->
+    <main>
+
+        <div class="page-window">
+            <div class="search-bar">
+                <input id="busqueda" type="text" placeholder="busqueda">
+                <a id="search-b" class="btn" onclick="realizarBusqueda()">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+            <div id="respuesta" class="page-results">
+                <div class="no-results">
+                    <div class="agendaCita">
+                        <h1>Agenda tu cita</h1>
+                        <i class="far fa-calendar-plus""></i>
+                        <hr>
+                    </div>
+                    <div class="central-line"></div>
+                    <div class="preguntasFrecuentes">
+                        <h1>Preguntas Frecuentes</h1>
+                        <i class="fas fa-question"></i>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="{{url_for('static', filename = '../static/js/busqueda.js')}}"></script>
+</body>
+
+</body>
+
+<footer>
+    <div class="contenedor-footer">
+        <div class="content-foo">
+            <h4>Phone</h4>
+            <p>........</p>
+        </div>
+        <div class="content-foo">
+            <h4>Email</h4>
+            <p>.......</p>
+        </div>
+        <div class="content-foo">
+            <h4>Location</h4>
+            <p>......</p>
+        </div>
+    </div>
+    <h2 class="titulo-final">&copy; Team 5 Cliclo 3 | Mision Tic</h2>
+</footer>
+
+</html>

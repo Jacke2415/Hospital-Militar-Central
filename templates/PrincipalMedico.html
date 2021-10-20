@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Medico</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Tipo de letra -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- conexion a css -->
+   
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/perfilmedico.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/listadecitas.css')}}">
+    <script src="{{ url_for('static', filename = '../static/js/perfilmedico.js') }}"></script>
+
+
+</head>
+
+<body>
+    <header>
+
+    <!-- inicio y señal de busqueda -->
+        <nav>
+            <a href="/inicio" class="btn">Inicio</a>
+            <a href="/inicio/busqueda" class="btn">
+                <i class="fas fa-search"></i>
+            </a>
+        </nav>
+    <!-- Nombre del medico y especialidad -->
+        <section class="textos-header">
+            <h1>Perfil Medico</h1>
+        </section>
+    
+    <!-- Flow del encabezado -->
+        <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+            style="height: 100%; width: 100%;">
+            <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none; fill: #fff;"></path>
+        </svg></div>
+    
+    </header>
+    
+    <form class="PrincipalMedico" action="" method="POST">
+        <div class="contenedor">
+            <div class="contenedor-imagen">
+                <h1>{{ user.name }}</h1>
+                <img src="{{ url_for('static', filename = 'img/imagenmedico.jpg') }}">
+            </div>
+            <div class="contenedor-id">
+                <p>Tipo de Identificación: {{ user.tipoId }}</p>
+                <p>Número de Identificación: {{ user.numId }}</p>
+                <p>Especialidad: {{ user.especialidad }}</p>
+                <p>No Consultorio: {{ user.consultorio }}</p>
+                <p>Sexo: {{ user.sexo }}</p>
+                <p>Edad: {{ user.edad }}</p>
+                <p>Teléfono: {{ user.tel }}</p>
+                <p>Dirección: {{ user.dir }}</p>
+                <input type="button" value="Actualizar información" class="button" onclick="location='/inicio/iniciarSesion/medico/actualizarDatos'" >
+            </div>
+            
+            
+            <section class="contenedor-formato-tabla">
+
+                <div class="datatable-container">
+                    <div class="header-tools">
+                        <div class="tools">
+                            <!-- boton check -->
+                            <ul>
+                                
+                                
+                                <li>
+                                    <p>Fecha Desde</p>
+                                    <button>
+                                        <input type="date" name="fechainicial" id="fechai">
+                                    </button>
+                                </li>
+                                <li>
+                                    <p>Fecha Hasta</p>
+                                    <button>
+                                        <input type="date" name="fechafinal" id="fechaf">
+                                    </button>
+                                </li>
+                                <li>
+                                    <button>
+                                        <button type="submit" name="consultar" id="consultar" onclick="validarfecha()" >Consultar
+                                    </button>
+                                </li>
+                            </ul>
+                            
+                        </div>
+        
+                        <div class="search">
+                            <input type="text" name="" id="" class="search-input">
+                        </div>
+                    </div>
+        
+                        <table class="datatable">
+                            <thead> 
+                                <tr>
+                                    {% for item in columnas %}
+                                    <th>{{ item }}</th>
+                                    {% endfor %}
+                                    
+                                </tr>
+                            </thead>
+        
+                            <tbody>
+                              
+                                {% for user in encontradas %}
+                                <tr>
+                                    {% for  item in user %}
+                                    <td>{{ item }}</td> 
+                                    {% endfor %} 
+                                </tr>
+                                {% endfor %}
+
+                                {% for user in encontradas1 %}
+                                <tr>
+                                    {% for  item in user %}
+                                    <td>{{ item }}</td> 
+                                    {% endfor %} 
+                                </tr>
+                                {% endfor %}
+        
+                                
+                            </tbody>
+                        </table>
+                        
+                <input type="button" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/detalleCita'" >
+            </div>
+        </div>
+    </form>
+</body>
+<footer>
+    <div class="contenedor-footer">
+        <div class="content-foo">
+            <h4>Phone</h4>
+            <p>........</p>
+        </div>
+        <div class="content-foo">
+            <h4>Email</h4>
+            <p>.......</p>
+        </div>
+        <div class="content-foo">
+            <h4>Location</h4>
+            <p>......</p>
+        </div>
+    </div>
+    <h2 class="titulo-final">&copy; Team 5 Cliclo 3 | Mision Tic</h2>
+</footer>
+</html>

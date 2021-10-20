@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Solicitar Cita</title>
+    <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename = '../static/css/estilosLogin.css') }}">
+    <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
+	
+
+</head>  
+<body>
+
+    
+    <nav>
+        <a href="/inicio" class="nav-link">Inicio</a>
+        <a href="/inicio/busqueda" class="btn">
+            <i class="fas fa-search"></i>
+        </a>
+    </nav>
+    
+
+    <form action=""
+    method="POST"
+    name="formularioCita"
+    class="formulario-registro"
+    onsubmit="return validarRegistro()">
+        
+        <h1>Solicita tu Cita</h1>
+
+            <li>Los datos de la cita seran enviados al correo suministrado.</li>
+            <li>Todos los campos son obligatorios.</li>
+            <p></p>
+            <div class="contenedor">
+               
+                <div class="input">
+                    Especialidad:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="especialidad">
+                    <option value = Ninguno>--Especialidad--                
+                    {% for item in espe%}
+                    <option value="{{ item }}">{{ item }} </option>
+                    {% endfor %}
+                    </select>
+                    
+                </div><br>
+                        
+        
+                <div class="input">
+                       
+                    Medico:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="medico">
+                    <option value = Ninguno>--Medico--                
+                        {% for item in medico%}
+                        <option value="{{ item }}">{{ item }} </option>
+                        {% endfor %}
+                    </select>
+                </div><br>
+
+                               
+                <div class="input-contenedor">
+                    <i class="fas fa-file-alt icon"></i>
+                    <input type="date" name = "fecha" placeholder="Fecha Cita">
+                </div>
+
+            
+                <p></p>
+
+                <input type="submit" value="Solicitar Cita" class="button">
+            
+            </div>
+
+    </form>
+
+<script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</body>
+
+</html>

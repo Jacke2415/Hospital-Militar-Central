@@ -1,0 +1,192 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family:'Montserrat', sans-serif;
+    margin: 0;
+    background: url(../img/img_login_paciente.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.contenedor{
+    width: 100%;
+    padding: 5px;
+    
+}
+
+nav{
+    text-align: right;
+    padding: 30px 50px 0 0;
+}
+
+nav > a{
+    color:#1a2537;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+nav > a:hover{
+    text-decoration: underline;
+}
+
+
+.formulario-login{
+    margin-top: 150px;
+    background: #fff;
+    padding: 3px;
+}
+.formulario-registro{
+    margin-top: 150px;
+    background: #fff;
+    padding: 5px;
+}
+h1{
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+}
+select{
+    align-items: center;
+    text-decoration: none;
+    color:  #999;
+    font-size: 120%;
+}
+legend{
+    text-decoration: none;
+    color: #1a2537;
+    font-weight: 600;
+    font-size: 90%;
+}
+.input{
+    color: #1a2537;
+    font-size: 120%;
+}
+
+input[type="text"],
+input[type="password"]{
+    font-size: 20px;/* tamaño letra */
+    width: 90%;
+    padding: 10px;
+    border: none;
+}
+input[type="date"]{
+    margin-left: 5%;
+    font-size: 20px;/* tamaño letra */
+    width: 40%;
+    padding: 10px;
+    border: none;
+}
+span{
+    font-size: 20px;
+    width: 30%;
+}
+
+.input-contenedor{
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+}
+.icon{
+    min-width: 50px;
+    text-align: center;
+    color: #999;
+}
+.button{/* boton registrate */
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background:  #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover{
+    background: cadetblue;/* Efecto del boton */
+}
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+input[type="radio"]{
+    width: 20px;
+    height: 20px;
+}
+li{
+    list-style-type:disc;
+    margin-left: 3%;
+    text-align: left;
+    font-size: x-large;
+}
+label{
+    font-size: 20px;/* tamaño letra */
+    width: 40%;
+    padding: 10px;
+    border: none;
+}
+
+p{
+    margin-left: 3%;
+    text-align: left;
+    font-size: x-large;
+}
+
+.link{
+    text-decoration: none;
+    color: #1a2537;
+    font-weight: 600;
+}
+.link:hover{
+        color: cadetblue;
+}
+@media(min-width:768px)
+{
+    .formulario-login{
+        margin: auto;
+        width: 600px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-left: 50px;
+        border-radius: 5%;
+    }
+    .formulario-registro{
+        margin: auto;
+        width: 600px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-left: 50px;
+        border-radius: 5%;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

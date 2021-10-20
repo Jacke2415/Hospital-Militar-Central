@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Militar Central</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Tipo de letra -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
+    <!-- conexion a css -->
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/estilos.css')}}">
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="/inicio" class="nav-link">Inicio</a>
+            <a href="/inicio/registro" class="btn">Registrar</a>
+            <a href="/inicio/iniciarSesion" class="btn">Iniciar Sesíon</a>
+            <a href="index.html" class="nav-link">Servicios</a>
+            <a href="index.html" class="nav-link">Contacto</a>
+            <a href="/inicio/busqueda" class="btn">
+                <i class="fas fa-search"></i>
+            </a>
+        </nav>
+        <section class="textos-header">
+            <h1>CLINICA MILITAR CENTRAL</h1>
+            <h2>Bienvenido</h2>
+        </section>
+        <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #fff;"></path>
+            </svg></div>
+    </header>
+
+    <main>
+        <section class="contenedor sobre-nosotros">
+            <h2 class="titulo">Nuestro servicios</h2>
+            <div class="contenedor-sobre-nosotros">
+                <img src="{{ url_for('static', filename = 'img/Servicios.jpeg')}}" alt="" class="imagen-about-us">
+                <div class="contenido-textos">
+                    <h3><span>1</span>Los mejores servicios</h3>
+                    <p>Somos un equipo interdisciplinario que articula las actividades asistenciales, administrativas y de apoyo para mantener y mejorar cada día la atención humanizada, de calidad y seguridad del paciente hospitalizado desde su ingreso hasta su egreso.Somos un equipo interdisciplinario que articula las actividades asistenciales, administrativas y de apoyo para mantener y mejorar cada día la atención humanizada, de calidad y seguridad del paciente hospitalizado desde su ingreso hasta su egreso.</p>
+                    <h3><span>2</span>Los mejores protocolos</h3>
+                    <p>La coordinación de Hospitalización mantiene comunicación permanente con las diferentes Direcciones de Sanidad de las F.F.M.M. (Ejército Nacional, Fuerza Aérea y Armada Nacional) quienes son los aseguradores, el HOMIL es la institución de alta complejidad que presta los servicios de salud para sus asegurados.</p>
+                </div>
+            </div>
+
+        <section class="galeria">
+
+            <div class="contenedor">
+                <h2 class="titulo">Galería</h2>
+
+                <div class="galeria-port">
+
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename = 'img/galeria1.jpeg')}}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
+                            <p>Nuestro trabajo</p>
+                        </div>
+                    </div>
+
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
+                            <p>Nuestro trabajo</p>
+                        </div>
+                    </div>
+
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
+                            <p>Nuestro trabajo</p>
+                        </div>
+                    </div>
+
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename = 'img/galeria.jpeg')}}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
+                            <p>Nuestro trabajo</p>
+                        </div>
+                    </div>
+
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
+                            <p>Nuestro trabajo</p>
+                        </div>
+                    </div>
+
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
+                            <p>Nuestro trabajo</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="clientes contenedor">
+
+            <h2 class="titulo">Que dicen nuestros usuarios</h2>
+            <div class="cards">
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename = 'img/usuario.jpeg')}}" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Name</h4>
+                        <p>.......</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename = 'img/usuario.jpeg')}}" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Name</h4>
+                        <p>.......</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <h4>Phone</h4>
+                <p>........</p>
+            </div>
+            <div class="content-foo">
+                <h4>Email</h4>
+                <p>.......</p>
+            </div>
+            <div class="content-foo">
+                <h4>Location</h4>
+                <p>......</p>
+            </div>
+        </div>
+        <h2 class="titulo-final">&copy; Team 5 Cliclo 3 | Mision Tic</h2>
+    </footer>
+
+</body>
+</html>

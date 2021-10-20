@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Registro</title>
+    <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href= "{{ url_for('static', filename = '../static/css/estilosLogin.css')}}">
+	
+
+</head>  
+<body>
+<form action=""
+method="POST"
+name="formularioRegistro"
+class="formulario-registro"
+onsubmit="return validarRegistro()">
+    
+    <h1>Actualizar Datos</h1>
+
+        <li>El usuario y contraseña serán enviados al correo  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del Medico suministrado.</li>
+        <li>Todos los campos son obligatorios.</li>
+    
+        <div class="contenedor">
+    
+        <div class="input-contenedor">
+        <i class="fas fa-user icon"></i>
+        <input type="text" name="nombre"  placeholder="Nombres">
+        </div>
+
+        <div class="input-contenedor">
+        <i class="fas fa-user icon"></i>
+        <input type="text" name="apellido" placeholder="Apellidos">
+        </div>
+
+        <div class="input-contenedor">
+            <i class="fas fa-user icon"></i>
+            <label for="fechaNacimiento"><span>Fecha de nacimiento </span></label>
+            <input type="date" name="fechaN">
+        </div>
+
+        <div class="input">
+            Sexo:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="sexo">
+            <option value = Ninguno>--Sexo--                
+            <option value = Femenino>Femenino
+            <option value = Masculino>Masculino
+            </select>
+        </div><br>
+
+        <div class="input">
+            <legend>Tipo de Documento:</legend>
+            <label>
+                <input type="radio" name="tipoId" value="CC"> C.C
+                <input type="radio" name="tipoId" value="Pasaporte"> Pasaporte 
+            </label> 
+        </div><br>
+                
+        <div class="input-contenedor">
+        <i class="fas fa-file-alt icon"></i>
+        <input type="text" name = "cedula" placeholder="Número de Identificación">
+        </div>
+
+        <div class="input">
+            Especialidad:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="especialidad">
+            <option value = Ninguno>--Especialidad--                
+            <option value = General>General
+            <option value = Pediatria>Pediatria
+            <option value = Dermatologia>Dermatologia
+            <option value = Ginecologia>Ginecologia
+            <option value = Cardiologia>Cardiologia
+            </select>
+        </div><br>
+
+        <div class="input-contenedor">
+            <i class="fas fa-file-alt icon"></i>
+            <input type="text" name = "nconsultorio" placeholder="No Consultorio">
+        </div>
+
+        <div class="input-contenedor">
+        <i class="fas fa-home icon"></i>
+        <input type="text" name = "direccion" placeholder="Dirección">
+        </div>
+
+        <div class="input-contenedor">
+        <i class="fas fa-phone icon"></i>
+        <input type="text" name="telefono" placeholder="Teléfono">
+        </div>
+        
+        <div class="input-contenedor">
+        <i class="fas fa-envelope icon"></i>
+        <input type="text" name = "correo"  placeholder="Correo Electronico">
+        </div>
+        
+        <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+        <input type="password" name="password"  placeholder="Contraseña">
+        </div>
+
+        <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+        <input type="password" name="passwordC" placeholder="Confirmar Contraseña">
+        </div>
+
+        
+        <input type="submit" value="Actualizar Datos" class="button">
+        
+    </div>
+    </form>
+    <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+*{
+    box-sizing: border-box;
+    font-family:'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+.contenedor {
+    padding: 60px 0;
+    width: 80%;
+    max-width: 2000px;
+    margin: auto;
+    overflow: hidden;
+    align-items: baseline;
+}
+
+.formulario-login{
+    position: relative;
+    background: #ebebeb;
+    border: 10px;
+}
+
+.titulo {
+    color: var(--color-primary);
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+header {
+    width: auto;
+    height: 50vh;
+    background: #160766e3;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, hsla(246, 95%, 50%, 0.459), hsla(197, 74%, 50%, 0.664)), url(../img/portada.svg);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(239, 53%, 60%, 0.459), hsla(236, 81%, 49%, 0.664)), url(../img/portada.svg);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+nav{
+    text-align: right;
+    padding: 30px 50px 0 0;
+}
+
+nav > a{
+    color:#ebebeb;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+nav > a:hover{
+    text-decoration: underline;
+}
+
+header .textos-header{
+    display: flex;
+    height: 130px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.textos-header h1{
+    font-size: 50px;
+    color:#ebebeb;
+}
+
+.textos-header h2{
+    font-size: 30px;
+
+    color:#ebebeb;
+}
+
+.wave{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* formulario medico */
+
+main .formato-medico{
+    padding: 50px 0 60px 0;
+
+}
+.contenedor-formato-tabla
+{
+    display: flex;
+    padding: 30px 0 60px 0;
+    width: auto;
+    align-items:stretch;
+
+}
+
+@media(min-width:500px)
+{
+
+    .formulario-login{
+        margin: auto;
+        width: 400px;
+        margin-top: 60px;
+        border-radius: 2%;
+    }
+/* efecto del boton*/
+    .button:hover{
+        background: cadetblue;
+    }
+/* Ajustes de los botones*/
+    .button1{
+        border: none;
+        width: 30%;
+        color: #ebebeb;
+        font-size: 15px;
+        background:  #1a2537;
+        padding: 15px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        ;
+    }
+    .button2{
+        border: none;
+        width: 30%;
+        color: #ebebeb;
+        font-size: 15px;
+        background:  #1a2537;
+        padding: 15px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px
+    }
+    .button3{
+        border: none;
+        width: 30%;
+        color: #ebebeb;
+        font-size: 15px;
+        background:  #1a2537;
+        padding: 15px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+/*Espacio y posicion de los campos de llenado*/
+    .input-contenedor{
+        margin-bottom: 15px;
+        border: 1px solid #aaa;
+    }
+    .icon{
+        min-width: 50px;
+        text-align:center;
+        color: #999;
+    }
+
+/*Ajustar el tamaño de los campos de llenado*/
+    input[type="text"]
+    {
+    font-size: 10px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #ebebeb;
+    }
+
+    legend{
+        text-decoration: none;
+        color: #1a2537;
+        font-weight: 600;
+        font-size: 120%;
+    }
+    select{
+        align-items: center;
+        text-decoration: none;
+        color:  #999;
+        font-size: 120%;
+    }
+    h1{
+        text-align: center;
+        color: #1a2537;
+        font-size: 40px;
+    }
+
+    .contenedor-historia-clinica {
+        margin: auto;
+        width: 400px;
+        margin-top: 0px;
+        border-radius: 2%;
+        max-width: 1000px; 
+        align-items: center;
+        margin-top: 60px;
+        border-radius: 2%;
+        align-items:stretch;
+    }
+    .verHistoriaClinica{
+        border: none;
+        width: 50%;
+        color: #ebebeb;
+        font-size: 15px;
+        background:  #1a2537;
+        padding: 10px 40px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+
+    }
+
+
+
+}
+/* footer */
+
+footer{
+    background: #414141;
+    padding: 60px 0 30px 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+.contenedor-footer{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: auto;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.content-foo{
+    text-align: center;
+}
+
+.content-foo h4{
+    color: #ebebeb;
+    border-bottom: 3px solid #af20d3;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.content-foo p{
+    color: #ebebeb;
+}
+
+.titulo-final{
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    color: #9e9797;
+}
+
+@media screen and (max-width:1000px){
+    header{
+        background-position: center;
+    }
+
+    .contenedor-sobre-nosotros{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sobre-nosotros .contenido-textos{
+        width: 90%;
+    }
+
+    .imagen-about-us{
+        width: auto;
+    }
+
+
+    /* Footer */
+
+    .contenedor-footer
+    {
+        flex-direction: column;
+        border: none;
+    }
+
+    .content-foo
+    {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .content-foo h4
+    {
+        border: none;
+    }
+
+    .content-foo p
+    {
+        color: #ccc;
+        border-bottom: 1px solid #ebebeb;
+        padding-bottom: 20px;
+    }
+
+    .titulo-final
+    {
+        font-size: 20px;
+    }
+}
