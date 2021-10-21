@@ -78,7 +78,24 @@ def getCitas():
     cursor.execute(strsql)
     response = cursor.fetchall()
     return response
+# Obtener citas del lado del admin
+def sql_search_citas_admin(cedula_usuario):
+    strsql = "select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= '"+cedula_usuario+"' ;"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
 
+def sql_search_citas_admin_fecha(fecha):
+    strsql = "select * from CITA where fecha= '"+fecha+"' ;"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
+
+#------------------------------------------------
 def sql_search_user_medico(cedula):
     strsql = "select * from Usuarios where NumeroIdentificacion = '"+cedula+"' AND TipoUsuario = 2;"
     con =sql_connection()
