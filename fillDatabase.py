@@ -93,5 +93,6 @@ for i in range(num_input):
 for i in range(num_input):
     db.sql_insert_user(str(tipo_usuario[i]),primer_nombre[i],segundo_nombre[i],sexo[i],tipo_id[i],str(numero_id[i]),especialidad[i],str(consultorio[i]),direction[i],str(telefono[i]),correo[i],contrasena[i])
 
+# Crear citas queda pendiente la historia clinica
 
-db.sql_delete_paciente('17648240')
+

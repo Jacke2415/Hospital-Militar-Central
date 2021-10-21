@@ -135,11 +135,6 @@ def Cancelarcita():
         db.sql_actualizarestadocita(idcita)
         Mensaje = "Su cita ha Sido Cancelada Exitosamente"
         return render_template("CancelarCita.html",cedula=cedula, Mensaje=Mensaje)
-      
-        
-
-
-
 
 @app.route("/inicio/iniciarSesion/medico", methods=['POST', 'GET'])
 def iniciarSesionMedico():

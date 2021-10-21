@@ -33,7 +33,7 @@ function validarRegistro() {
         return false;
     }
 
-    if(fechaN == null || fechaN < Date.now ){
+    if(fechaN == null){
         swal.fire({
             title:"ERROR",
             text:"Se debe seleccionar una fecha valido",
