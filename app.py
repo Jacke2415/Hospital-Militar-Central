@@ -218,6 +218,7 @@ def administrador():
 
 @app.route("/inicio/iniciarSesion/administrador/paciente",methods=['POST', 'GET'])
 def administradorPaciente():
+    #comentario de prueba frank
     columnas = []
     busqueda_columnas = db.get_columns_usuario()
     # Agrego a columnas los nombres de las columnas buscado en bd
@@ -291,9 +292,39 @@ def eliminarMedico():
 def registroMedico():
     return render_template("registroMedico.html")
 
-@app.route("/inicio/iniciarSesion/administrador/citas")
+@app.route("/inicio/iniciarSesion/administrador/citas",methods=['POST', 'GET'])
 def administradorCitas():
-    return render_template("administradorCitas.html")
+    #montar los nombres de las columnas para la tabla de la vista
+    columnas = []
+    busqueda_columnas = db.get_columns_cita()
+    # Agrego a columnas los nombres de las columnas busacado en bd
+    for i in busqueda_columnas:
+        columnas.append(f'{i}')
+    #Organizo la informcion mostrada por defecto, todos los medicos
+    citas = []
+    dbCitas = db.getCitas()
+    for row in dbCitas:
+        citas.append(row)
+    
+    if request.method == 'GET':
+        return render_template("administradorCitas.html",columnas=columnas,citas=citas)
+    else:
+        coincidencias = []
+        cedula = request.form['cedula']
+        app.logger.info(cedula)
+        # cedula_medico_cita = request.form['medico']
+        # fecha_cita = request.form['fecha']
+        busqueda_cedula = db.sql_search_citas_admin(cedula)
+        app.logger.info(busqueda_cedula)
+        if len(busqueda_cedula)>0:
+            cond = True
+            app.logger.info("prueba")
+            for row in busqueda_cedula:
+                coincidencias.append(row)
+            return render_template("administradorCitas.html", coincidencias=coincidencias, columnas=columnas,cond=cond)
+        else:
+            error = f'El usuario con la identificacion {cedula} no se encuentra registrado '
+            return render_template("administradorCitas.html", error = error)
 
 @app.route("/inicio/iniciarSesion/administrador/hclinica")
 def administradordHClinica():
