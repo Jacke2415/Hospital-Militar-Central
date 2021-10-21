@@ -223,6 +223,7 @@ def administrador():
 
 @app.route("/inicio/iniciarSesion/administrador/paciente",methods=['POST', 'GET'])
 def administradorPaciente():
+    #comentario de prueba frank
     columnas = []
     busqueda_columnas = db.get_columns_usuario()
     # Agrego a columnas los nombres de las columnas buscado en bd
