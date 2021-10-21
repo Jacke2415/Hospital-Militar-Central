@@ -297,9 +297,35 @@ def eliminarMedico():
 def registroMedico():
     return render_template("registroMedico.html")
 
-@app.route("/inicio/iniciarSesion/administrador/citas")
+@app.route("/inicio/iniciarSesion/administrador/citas",methods=['POST', 'GET'])
 def administradorCitas():
-    return render_template("administradorCitas.html")
+    #montar los nombres de las columnas para la tabla de la vista
+    columnas = []
+    busqueda_columnas = db.get_columns_cita()
+    # Agrego a columnas los nombres de las columnas busacado en bd
+    for i in busqueda_columnas:
+        columnas.append(f'{i}')
+    #Organizo la informcion mostrada por defecto, todos los medicos
+    citas = []
+    dbCitas = db.getCitas()
+    for row in dbCitas:
+        citas.append(row)
+    app.logger.info(citas[1][3])
+    if request.method == 'GET':
+        return render_template("administradorCitas.html",columnas=columnas,citas=citas)
+    else:
+        coincidencia = []
+        global cedula_a_buscar_medico 
+        cedula_a_buscar_medico = request.form['cedula']
+        busqueda_cedula = db.sql_search_user_medico(cedula_a_buscar_medico)
+        if len(busqueda_cedula)>0:
+            cond = True
+            for i in range(len(busqueda_columnas)):
+                coincidencia.append(f'{busqueda_cedula[0][i]}')
+            return render_template("administradorCitas.html", coincidencia=coincidencia, columnas=columnas,cond=cond)
+        else:
+            error = f'El usuario con la identificacion {cedula_a_buscar_medico} no se encuentra registrado '
+            return render_template("administradorCitas.html", error = error)
 
 @app.route("/inicio/iniciarSesion/administrador/hclinica")
 def administradordHClinica():

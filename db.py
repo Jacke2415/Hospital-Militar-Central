@@ -71,6 +71,14 @@ def getMedicos():
     response = cursor.fetchall()
     return response
 
+def getCitas():
+    strsql = "select * from CITA"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
+
 def sql_search_user_medico(cedula):
     strsql = "select * from Usuarios where NumeroIdentificacion = '"+cedula+"' AND TipoUsuario = 2;"
     con =sql_connection()
@@ -167,5 +175,5 @@ def sql_citasmedico_fecha(cedula,Finicial,Ffinal):
     response = cursor.fetchall()
     return response
    
-    
+
 
