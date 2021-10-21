@@ -16,6 +16,7 @@ def sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoDocumento, cedula, 
     con.commit()
     con.close()
 
+
 def sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo,contraseña, cedulae):
     strsql = "update Usuarios set TipoUsuario = '"+tipo+"', Nombre = '"+nombre+"', Apellido = '"+apellido+"', FechaNacimiento = '"+fechaN+"', Sexo ='"+sexo+"', TipoIdentificacion = '"+tipoDocumento+"', NumeroIdentificacion = '"+cedula+"', Especialidad = '"+especialidad+"', Consultorio = '"+consultorio+"', Direccion = '"+direccion+"', Telefono = "+telefono+", Correo = '"+correo+"', Contraseña = '"+contraseña+"' where NumeroIdentificacion = '"+cedulae+"';"
     con = sql_connection()
@@ -192,5 +193,11 @@ def sql_citasmedico_fecha(cedula,Finicial,Ffinal):
     response = cursor.fetchall()
     return response
    
-
+def llenar_cita(cedula_paciente,_cedula_medico,fecha,hora,historia,calificacion,comentarios,estado):
+    strsql = 'insert into Usuarios(TipoUsuario, Nombre, Apellido, FechaNacimiento, Sexo,TipoIdentificacion, NumeroIdentificacion, Especialidad, Consultorio, Direccion, Telefono, Correo, Contraseña)' 'values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ('"+tipo+"','"+nombre+"', '"+apellido+"','"+fechaN+"', '"+sexo+"', '"+tipoDocumento+"', '"+cedula+"', '"+especialidad+"', '"+consultorio+"', '"+direccion+"', "+telefono+", '"+correo+"', '"+contraseña+"')
+    con = sql_connection()    
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    con.commit()
+    con.close()
 
