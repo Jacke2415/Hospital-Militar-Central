@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 from flask import current_app, g
+from werkzeug.security import generate_password_hash
 
 def sql_connection():
     try:
@@ -17,16 +18,15 @@ def close_db():
         con.close()
 #listo
 def sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo,contraseña):
-    strsql = 'INSERT INTO Usuarios(TipoUsuario, Nombre, Apellido, FechaNacimiento, Sexo,TipoIdentificacion, NumeroIdentificacion, Especialidad, Consultorio, Direccion, Telefono, Correo, Contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña,)
+    strsql = 'INSERT INTO Usuarios(TipoUsuario, Nombre, Apellido, FechaNacimiento, Sexo,TipoIdentificacion, NumeroIdentificacion, Especialidad, Consultorio, Direccion, Telefono, Correo, Contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, generate_password_hash(contraseña),)
     con = sql_connection()    
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
     con.close()
 
-
 def sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo,contraseña, cedulae):
-    strsql = 'update Usuarios set TipoUsuario = ?, Nombre = ?, Apellido = ?, FechaNacimiento =?, Sexo =?, TipoIdentificacion = ?, NumeroIdentificacion = ?, Especialidad = ?, Consultorio = ?, Direccion = ?, Telefono = ?, Correo = ?, Contraseña = ? where NumeroIdentificacion = ?', (tipo, nombre, apellido, fechaN,sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña, cedulae,)
+    strsql = 'update Usuarios set TipoUsuario = ?, Nombre = ?, Apellido = ?, FechaNacimiento =?, Sexo =?, TipoIdentificacion = ?, NumeroIdentificacion = ?, Especialidad = ?, Consultorio = ?, Direccion = ?, Telefono = ?, Correo = ?, Contraseña = ? where NumeroIdentificacion = ?', (tipo, nombre, apellido, fechaN,sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, generate_password_hash(contraseña), cedulae,)
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
