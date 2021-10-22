@@ -74,6 +74,14 @@ def get_columns_cita():
     names = list(map(lambda x: x[0], cursor.description))
     return names
 
+def get_columns_hclinica():
+    strsql = 'select * from HClinica'
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    names = list(map(lambda x: x[0], cursor.description))
+    return names
+
 def getMedicos():
     strsql = 'select * from Usuarios where TipoUsuario = ?',('2',)
     con =sql_connection()
@@ -87,6 +95,23 @@ def getCitas():
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
+
+def getHClinica():
+    strsql = "select * from HClinica"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
+
+# Obtener Historia CLinica del lado del admin
+def sql_search_Hclinica(cedula_usuario):
+    strsql = 'select HClinica.IdHistoriaC, Usuarios.NumeroIdentificacion, CITA.HistoriaClinica from HClinica, Usuarios, CITA where Usuarios.NumeroIdentificacion=? and',(cedula_usuario)
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
     
@@ -124,6 +149,7 @@ def sql_search_citas_admin(cedula_usuario):
     cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
+
 
 def sql_search_citas_admin_fecha(fecha):
     strsql = 'select * from CITA where fecha= ?',(fecha,)

@@ -1,11 +1,9 @@
 import datetime 
 from os import name
-from flask import Flask, render_template, request, session, url_for, redirect
-from werkzeug.security import check_password_hash
+from flask import Flask, render_template, request, url_for, redirect
 import db
 
 app = Flask(__name__)
-app.secret_key = 'team5'
 
 @app.route("/")
 def inicio():
@@ -50,10 +48,8 @@ def iniciarSesion():
         contraseña = request.form['password']
         encontrado = db.sql_search_user(cedula_init)
         if len(encontrado)>0: 
-            if check_password_hash(encontrado[0][13], contraseña):
+            if str(encontrado[0][13]) == contraseña:
                 if encontrado[0][1] == 1:
-                    session.clear()
-                    session['user_id'] = encontrado[0][0]
                     return redirect(url_for('iniciarSesionPaciente'))
                 elif encontrado[0][1] == 2:
                     return redirect(url_for('iniciarSesionMedico'))
@@ -93,6 +89,7 @@ def iniciarSesionPaciente():
     encontradas=[]
     historial=[]
     citas= db.sql_search_citaspacientes (str(cedula))
+    print(type(citas[0][1]))
     medico=db.get_Medicos1()
     if len(citas)>0:
         for row in citas:
@@ -104,7 +101,7 @@ def iniciarSesionPaciente():
             historial.append(row)
     else:
         error = "Usuario no Tiene Citas"
-        return render_template("principalPaciente.html",user=user, error = error)
+        return render_template("principalPaciente.html", error = error)
     return render_template("principalPaciente.html", user=user, cedula=cedula, encontradas=encontradas, columnas=columnas, 
     historial=historial)
     
@@ -138,6 +135,11 @@ def Cancelarcita():
         db.sql_actualizarestadocita(idcita)
         Mensaje = "Su cita ha Sido Cancelada Exitosamente"
         return render_template("CancelarCita.html",cedula=cedula, Mensaje=Mensaje)
+      
+        
+
+
+
 
 @app.route("/inicio/iniciarSesion/medico", methods=['POST', 'GET'])
 def iniciarSesionMedico():
@@ -321,7 +323,6 @@ def administradorCitas():
         app.logger.info(busqueda_cedula)
         if len(busqueda_cedula)>0:
             cond = True
-            app.logger.info("prueba")
             for row in busqueda_cedula:
                 coincidencias.append(row)
             return render_template("administradorCitas.html", coincidencias=coincidencias, columnas=columnas,cond=cond)
@@ -329,9 +330,39 @@ def administradorCitas():
             error = f'El usuario con la identificacion {cedula} no se encuentra registrado '
             return render_template("administradorCitas.html", error = error)
 
-@app.route("/inicio/iniciarSesion/administrador/hclinica")
+@app.route("/inicio/iniciarSesion/administrador/hclinica",methods=['POST', 'GET'])
 def administradordHClinica():
-    return render_template("administradorHistoriaClinica.html")
+    #montar los nombres de las columnas para la tabla de la vista
+    columnas = []
+    busqueda_columnas = db.get_columns_hclinica()
+    # Agrego a columnas los nombres de las columnas busacado en bd
+    for i in busqueda_columnas:
+        columnas.append(f'{i}')
+    #Organizo la informcion mostrada por defecto, todos los medicos
+    hClinicas = []
+    dbCitas = db.getHClinica()
+    for row in dbCitas:
+        hClinicas.append(row)
+    
+    if request.method == 'GET':
+        return render_template("administradorHistoriaClinica.html",columnas=columnas,hClinicas=hClinicas)
+    else:
+        coincidencias = []
+        cedula = request.form['cedula']
+        app.logger.info(cedula)
+        # cedula_medico_cita = request.form['medico']
+        # fecha_cita = request.form['fecha']
+        busqueda_cedula = db.sql_search_Hclinica(cedula)
+        app.logger.info(busqueda_cedula)
+        if len(busqueda_cedula)>0:
+            cond = True
+            for row in busqueda_cedula:
+                coincidencias.append(row)
+            return render_template("administradorHistoriaClinica.html", coincidencias=coincidencias, columnas=columnas,cond=cond)
+        else:
+            error = f'El usuario con la identificacion {cedula} no se encuentra registrado '
+            return render_template("administradorHistoriaClinica.html", error = error)
+
 
 @app.route("/inicio/iniciarSesion/administrador/agenda")
 def administradordAgenda():
@@ -344,10 +375,5 @@ def administradordAyuda():
 @app.route("/inicio/iniciarSesion/medico/detalleCita")
 def detalleCita():
     return render_template("detallecitamedico.html")
-
-@app.route( '/logout' )
-def logout():
-    session.clear()
-    return redirect(url_for('iniciarSesion'))
 
 
