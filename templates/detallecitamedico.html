@@ -55,41 +55,42 @@
     
     <section class="contenedor-formato-tabla">
 
-        <form action="" method = "GET" name ="detallemedico" class ="formulario-login" onsubmit = "return validarLogin()">
+        <form action="" method = "POST" name ="detallemedico" class ="formulario-login" onsubmit = "return validarLogin()">
 
             <div class="contenedor">  
 
                 <h1>Datos</h1>
+                {{ Mesaje }}
+                <div class="input-contenedor">
+                    <input type ="text" name ="Nombre" id="nombre" placeholder="{{ detallecitap.nombre }}" disabled="true" >{{ nombre }}
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Cedula" id="cedula" placeholder="{{ detallecitap.cedula }}" disabled="">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Sexo" id="sexo" placeholder="{{  detallecitap.sexo  }}" disabled="true">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Edad" id="edad" placeholder="{{ detallecitap.edad }}" disabled="true">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="text" name ="Fecha" id="fecha" placeholder="{{ detallecitap.fecha }}     {{ detallecitap.hora }}" disabled="true">
+                </div>
+
+                <div class="input-contenedor">
+                    <input type ="date" name ="FechaC" id="hora" placeholder="" disabled="true">
+                </div>
         
-                <div class="input-contenedor">
-                    <input type ="text" name ="Nombre" id="nombre" placeholder="Nombre del paciente" disabled="true" >
-                </div>
-
-                <div class="input-contenedor">
-                    <input type ="text" name ="Cedula" id="cedula" placeholder="N°de Identificacion" disabled="">
-                </div>
-
-                <div class="input-contenedor">
-                    <input type ="text" name ="Sexo" id="sexo" placeholder="Sexo" disabled="true">
-                </div>
-
-                <div class="input-contenedor">
-                    <input type ="text" name ="Edad" id="edad" placeholder="Edad" disabled="true">
-                </div>
-
-                <div class="input-contenedor">
-                    <input type ="text" name ="Fecha" id="fecha" placeholder="Fecha" disabled="true">
-                </div>
-
-                <div class="input-contenedor">
-                    <input type ="text" name ="Hora" id="hora" placeholder="Hora" disabled="true">
-                </div>
-        
 
 
-                <input type="submit" value="Aceptar" class="button1">
-                <input type="button" value="Editar" class="button2" onclick="habilitarinputs() ">
-                <input type="submit" value="Cancelar" class="button3">
+                <input type="submit" value="Guardar" class="button1">
+                <input type="button" value="Editar" class="button2" onclick="habilitarinputs()  ">
+                <input type="button" value="Aceptar" class="button1" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita/Aceptarcita'" >
+                <input type="button" value="Cancelar" class="button3">
 
             </div>
         </form>
