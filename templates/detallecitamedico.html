@@ -60,7 +60,7 @@
             <div class="contenedor">  
 
                 <h1>Datos</h1>
-                {{ Mesaje }}
+                
                 <div class="input-contenedor">
                     <input type ="text" name ="Nombre" id="nombre" placeholder="{{ detallecitap.nombre }}" disabled="true" >{{ nombre }}
                 </div>
@@ -87,14 +87,14 @@
         
 
 
-                <input type="submit" value="Guardar" class="button1">
-                <input type="button" value="Editar" class="button2" onclick="habilitarinputs()  ">
-                <input type="button" value="Aceptar" class="button1" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita/Aceptarcita'" >
-                <input type="button" value="Cancelar" class="button3">
+                <input type="submit" name="action" value="Guardar" class="button1">
+                <input type="button" name="action" value="Editar" class="button2" onclick="habilitarinputs()  ">
+                <input type="submit" name="action" value="Aceptar" class="button1" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita/Aceptarcita'" >
+                <input type="submit" name="action" value="Cancelar" class="button3">
 
             </div>
         </form>
-
+        {{ Mesaje }}
         <div class="contenedor-historia-clinica">
             <!-- Texto dentro Historia clinica -->
             <textarea name="historiaclinica" id="textarea" cols="30" rows="10">
@@ -103,7 +103,7 @@
                                     HISTORIA CLINICA
             </textarea>
         
-            <input type="submit" value="Ver historia clinica" id="botonhclinica" class="verHistoriaClinica">
+            <input type="submit" name="action" value="Verhistoriaclinica" id="botonhclinica" class="verHistoriaClinica">
         </div>
 
         </section>
