@@ -17,7 +17,7 @@ def close_db():
     if con is not None:
         con.close()
 #listo
-def sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo,contraseña):
+def sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña):
     strsql = 'INSERT INTO Usuarios(TipoUsuario, Nombre, Apellido, FechaNacimiento, Sexo,TipoIdentificacion, NumeroIdentificacion, Especialidad, Consultorio, Direccion, Telefono, Correo, Contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, generate_password_hash(contraseña),)
     con = sql_connection()    
     cursorObj = con.cursor()

@@ -2,6 +2,7 @@ import datetime
 from os import name
 from flask import Flask, render_template, request, session, url_for, redirect
 import db
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = 'team5'
@@ -49,7 +50,7 @@ def iniciarSesion():
         contraseña = request.form['password']
         encontrado = db.sql_search_user(cedula_init)
         if len(encontrado)>0: 
-            if str(encontrado[0][13]) == contraseña:
+            if check_password_hash(encontrado[0][13], contraseña):
                 if encontrado[0][1] == 1:
                     session.clear()
                     session['user_id'] = encontrado[0][0]
@@ -95,9 +96,7 @@ def iniciarSesionPaciente():
     #if request.method == 'GET':
     encontradas=[]
     historial=[]
-    citas= db.sql_search_citaspacientes (str(cedula))
-    print(type(citas[0][1]))
-    medico=db.get_Medicos1()
+    citas= db.sql_search_citaspacientes (cedula)
     if len(citas)>0:
         for row in citas:
             encontradas.append(row)
@@ -108,7 +107,7 @@ def iniciarSesionPaciente():
             historial.append(row)
     else:
         error = "Usuario no Tiene Citas"
-        return render_template("principalPaciente.html", error = error)
+        return render_template("principalPaciente.html", user = user, error = error)
     return render_template("principalPaciente.html", user=user, cedula=cedula, encontradas=encontradas, columnas=columnas, 
     historial=historial)
     
@@ -386,6 +385,6 @@ def detalleCita():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login' ))
+    return redirect(url_for('iniciarSesion'))
 
 
