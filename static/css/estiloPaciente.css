@@ -76,3 +76,18 @@ caption{
     border-left: 2px solid #1a2537;
     border-right: 2px solid #1a2537;
 }
+nav{
+    text-align: right;
+    padding: 30px 50px 0 0;
+}
+
+nav > a{
+    color:#1a2537;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+nav > a:hover{
+    text-decoration: underline;
+}

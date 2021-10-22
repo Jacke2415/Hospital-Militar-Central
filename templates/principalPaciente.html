@@ -11,6 +11,15 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename = '../static/css/estiloPaciente.css') }}">
     <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.png') }}">
 </head>
+    <!-- inicio y señal de busqueda -->
+    <nav>
+        <a href="/inicio" class="btn">Inicio</a>
+        <a href="/logout" class="btn">logout</a>
+        <a href="/inicio/busqueda" class="btn">
+            <i class="fas fa-search"></i>
+        </a>
+    </nav>
+
 <body>
     <form class="principal-paciente" method = "POST">
         <div class="contenedor">
