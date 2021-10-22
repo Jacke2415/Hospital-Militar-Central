@@ -1,4 +1,5 @@
-import datetime 
+import datetime
+from logging import error 
 from os import name
 from flask import Flask, render_template, request, session, url_for, redirect
 import db
@@ -373,9 +374,32 @@ def eliminarMedico():
     db.sql_delete_paciente(cedula_eliminar)
     return '<h1>El medico con cedula ' + cedula_eliminar + 'fue eliminado' + '<a class="link" href="/inicio/iniciarSesion/administrador/paciente">Regresar</a></br><h1>'
  
-@app.route("/inicio/iniciarSesion/administrador/medico/registroMedico")
+@app.route("/inicio/iniciarSesion/administrador/medico/registroMedico", methods = ['GET', 'POST'])
 def registroMedico():
-    return render_template("registroMedico.html")
+    if request.method == 'GET':
+        return render_template("registroMedico.html")
+    else:
+        tipo = '2'
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        fechaN = request.form['fechaN']
+        sexo = request.form['sexo']
+        tipoId = request.form['tipoId']
+        cedula = request.form['cedula']
+        especialidad = request.form['especialidad']
+        consultorio = request.form['nconsultorio']
+        direccion = request.form['direccion']
+        telefono = request.form['telefono']
+        correo = request.form['correo']
+        contraseña = request.form['password']
+        encontrado = db.sql_search_user(cedula)
+        if len(encontrado)>0:
+            error = 'El medico que desea registrar ya se encuentra en nuestra base de datos'
+            return render_template("administradorMedico.html", error = error)
+        else:
+            db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
+            error = 'El medico ha sido registrado exitosamente'
+            return render_template("administradorMedico.html", error = error)  
 
 @app.route("/inicio/iniciarSesion/administrador/citas",methods=['POST', 'GET'])
 def administradorCitas():
