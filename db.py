@@ -143,7 +143,7 @@ def sql_search_user_medico(cedula):
 
 # Obtener citas del lado del admin
 def sql_search_citas_admin(cedula_usuario):
-    strsql = 'select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= ?',(cedula_usuario)
+    strsql = 'select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= ?',(cedula_usuario,)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)
@@ -185,7 +185,7 @@ def sql_search_user_paciente(cedula):
     return response
 
 def sql_search_citaspacientes(cedula):
-    strsql = 'select Idcita, Medico, Fecha, Hora, Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= ? and CITA.Estado= ?',(cedula, 'Pendiente')
+    strsql = 'select Idcita, Medico, Fecha, Hora, Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= ? and CITA.Estado= ?',(cedula, 'Pendiente',)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)

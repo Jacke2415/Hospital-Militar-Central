@@ -1,9 +1,10 @@
 import datetime 
 from os import name
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, session, url_for, redirect
 import db
 
 app = Flask(__name__)
+app.secret_key = 'team5'
 
 @app.route("/")
 def inicio():
@@ -50,10 +51,16 @@ def iniciarSesion():
         if len(encontrado)>0: 
             if str(encontrado[0][13]) == contraseña:
                 if encontrado[0][1] == 1:
+                    session.clear()
+                    session['user_id'] = encontrado[0][0]
                     return redirect(url_for('iniciarSesionPaciente'))
                 elif encontrado[0][1] == 2:
+                    session.clear()
+                    session['user_id'] = encontrado[0][0]
                     return redirect(url_for('iniciarSesionMedico'))
                 elif encontrado[0][1] == 3:
+                    session.clear()
+                    session['user_id'] = encontrado[0][0]
                     return redirect(url_for('administrador'))
             else:
                 return '<h1>Contraseña incorrecta, intentar de nuevo <a class="link" href="iniciarSesion">Iniciar Sesión</a></h1>'
@@ -375,5 +382,10 @@ def administradordAyuda():
 @app.route("/inicio/iniciarSesion/medico/detalleCita")
 def detalleCita():
     return render_template("detallecitamedico.html")
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login' ))
 
 
