@@ -161,11 +161,6 @@ def Cancelarcita():
         db.sql_actualizarestadocita(idcita,estado)
         Mensaje = "Su cita ha Sido Cancelada Exitosamente"
         return render_template("CancelarCita.html",cedula=cedula, Mensaje=Mensaje)
-        
-
-
-
-
 
 @app.route("/inicio/iniciarSesion/medico", methods=['POST', 'GET'])
 def iniciarSesionMedico():
@@ -216,7 +211,6 @@ def iniciarSesionMedico():
             app.logger.info(encontradas1)
             
         return render_template("principalMedico.html", user=user,encontradas1=encontradas1,columnas=columnas)
-        
 
 @app.route("/inicio/iniciarSesion/medico/actualizarDatos", methods = ['GET', 'POST'])
 def actualizarDatos():
@@ -316,7 +310,21 @@ def Aceptarcita():
 
 @app.route("/inicio/iniciarSesion/administrador")
 def administrador():
-    return render_template("administrador.html")
+    cedula = cedula_init
+    encontrado = db.sql_search_user(cedula)
+    today = datetime.datetime.today()
+    fechaN = encontrado[0][4]
+    fechaN = datetime.datetime.strptime(fechaN, "%Y-%m-%d")
+    user = {
+            'name' : encontrado[0][2] + ' ' + encontrado[0][3],
+            'tipoId': encontrado[0][6],
+            'numId': encontrado[0][7],
+            'sexo': encontrado[0][5],
+            'edad': today.year - fechaN.year - ((today.month, today.day) < (fechaN.month, fechaN.day)),
+            'tel': encontrado[0][11],
+            'dir': encontrado[0][10]
+            }
+    return render_template("administrador.html", user = user)
 
 @app.route("/inicio/iniciarSesion/administrador/paciente",methods=['POST', 'GET'])
 def administradorPaciente():
@@ -347,7 +355,7 @@ def administradorPaciente():
             error = f'El usuario con la identificacion {cedula_a_buscar_paciente} no se encuentra registrado '
             return render_template("administradorPaciente.html", error = error)
 
-@app.route("/eliminarPaciente", methods=['POST'])
+@app.route("/eliminarPaciente", methods=['POST', 'GET'])
 def eliminarPaciente():
     cedula_eliminar = cedula_a_buscar_paciente
     db.sql_delete_paciente(cedula_eliminar)
@@ -384,7 +392,7 @@ def administradorMedico():
             error = f'El usuario con la identificacion {cedula_a_buscar_medico} no se encuentra registrado '
             return render_template("administradorMedico.html", error = error)
 
-@app.route("/eliminarMedico", methods=['POST'])
+@app.route("/eliminarMedico", methods=["POST", "GET"])
 def eliminarMedico():
     cedula_eliminar = cedula_a_buscar_medico
     db.sql_delete_paciente(cedula_eliminar)

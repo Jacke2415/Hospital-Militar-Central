@@ -595,4 +595,25 @@ SVG Icons - svgicons.sparkk.fr
   stroke: rgb(156, 139, 139);
   stroke-width: 1;
 }
+.contenedor-id{
+  font-weight: bold;
+  text-decoration-color: #1a2537;
+  margin-left: 27%;
+  width: 35%;
+  height: 100%;
+  padding: 30px;
+  border: 3px solid #1a2537;
+}
+.contenedor-imagen{
+  text-decoration-color: #1a2537;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+}
+img{
+  margin-left: 75%;
+  width: 200px;
+  overflow:auto;
+}
 
