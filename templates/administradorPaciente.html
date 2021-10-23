@@ -243,13 +243,15 @@
             <section class="contenedor-formato-tabla">
                 <div class="contenedor">
                     <h1>Pacientes</h1>
-                    <form action="/inicio/iniciarSesion/administrador/paciente" method='POST'>
+                    <form action="/inicio/iniciarSesion/administrador/paciente" method="POST">
                         <div class="input-contenedor">
                             <i class="fas fa-envelope icon"></i>
                             <input type="text" name="cedula" placeholder="Número de identificación">
                         </div>
                         <input type="submit" value="Buscar" class="button1" onclick="validaciondashboardmedico() ">
                         <input type="button" value="Nuevo" class="button2" onclick="location='/inicio/registro'" />
+                        <input type="button" value="Actualizar" class="button1" onclick="location='/inicio/iniciarSesion/medico/actualizarDatos'" />
+                        <input type="button" value="Eliminar" class="button2" onclick="location='/eliminarPaciente'" />
                     </form>
                 </div>
             </section>
@@ -274,11 +276,11 @@
                         {% for item in coincidencia%}
                         <td>{{ item }}</td> 
                         {% endfor %}
-                        {% if cond == true %}
+                        <!--{% if cond == true %}
                         <form action="/eliminarPaciente" method="post">
                             <button name="eliminarPaciente" type="submit">Eliminar Paciente</button>
                         </form>
-                        {% endif %}
+                        {% endif %}-->
                     </tr>
                 </table>
                 

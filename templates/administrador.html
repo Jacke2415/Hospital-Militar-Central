@@ -101,14 +101,14 @@
 
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Dashhboard Administrativo</h3>
+                    <h3>Panel Administrativo</h3>
                 </li>
                 <li>
                     <a href="/inicio/iniciarSesion/administrador">
                         <svg>
                             <use xlink:href="#pages"></use>
                         </svg>
-                        <span>Dashboard</span>
+                        <span>Panel Administrativo</span>
                     </a>
                 </li>
                 <li>
@@ -200,13 +200,13 @@
         </header>
         <section class="page-content">
             <section class="search-and-user">
-                <h1>Dashboard SuperAdmin</h1>
+                <h1>{{ user.name }}</h1>
             <div class="admin-profile" id="header">
                 <div id="userbar">
                     <div><span>Bienvenido!</span></div>
-                    <div><span class="username">Administrador</span></div>
+                    <div><span class="username">{{ user.name }}</span></div>
                     <div><a href="/edit-profile.html">Ver perfil</a></div>
-                    <div><a href="https://www.Hospitalmilitar.com/_ah/logout?...">Cerrar sesion</a></div>
+                    <div><a href="/logout">Cerrar sesion</a></div>
                 </div>
                 <div class="notifications">
                     <svg>
@@ -216,8 +216,17 @@
             </div>
             
             </section>
-            <div>
+            <div class="contenedor-imagen">
+                <img src="{{ url_for('static', filename = 'img/fotico.jpg') }}">
+            </div>
+            <div class="contenedor-id">
                 <!--Aqui va el contenido-->
+                <p>Tipo de Identificación: {{ user.tipoId }}</p>
+                <p>Número de Identificación: {{ user.numId }}</p>
+                <p>Sexo: {{ user.sexo }}</p>
+                <p>Edad: {{ user.edad }}</p>
+                <p>Teléfono: {{ user.tel }}</p>
+                <p>Dirección: {{ user.dir }}</p>
             </div>
             <footer class="page-footer">
             <span>Desarrollado por G38Team5 </span>
