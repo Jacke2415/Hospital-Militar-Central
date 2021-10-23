@@ -659,3 +659,21 @@
     background-color: var(--dt-hover-cell-color);
 }
 
+.contenedor-formato-tabla .contenedor .input-contenedor{
+    margin-bottom: 25px;
+    border: 1px solid #aaa;
+    font-size: 25px;
+}
+
+.contenedor-formato-tabla .contenedor .input-contenedor text{
+    margin-bottom: 25px;
+    border: 1px solid #aaa;
+    font-size: 25px;
+}
+
+input[type="text"],
+input[type="password"]{
+    font-size: 20px;/* tamaño letra */
+    width: 100%;
+    padding: 10px;
+    border: none;
