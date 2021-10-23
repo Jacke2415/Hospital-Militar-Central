@@ -15,10 +15,17 @@ function validarRegistro() {
     
     if(nombre == null || nombre.length < 2 || /^\s+$/.test(nombre)){
         swal.fire({
-            title:"ERROR",
-            text:"Se debe ingresar un nombre valido",
-            icon:"error",
-            confirmButtonText:"continuar",
+            title: "ERROR",
+            text: "Se debe ingresar un nombre valido",
+            icon: 'error',
+            confirmButtonText: "continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -29,6 +36,13 @@ function validarRegistro() {
             text:"Se debe ingresar un apellido valido",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -39,6 +53,13 @@ function validarRegistro() {
             text:"Se debe seleccionar una fecha valido",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -49,6 +70,13 @@ function validarRegistro() {
             text:"Debes seleccionar tu sexo",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -72,6 +100,13 @@ function validarRegistro() {
             text:"No has elegido ninguna opción de tipo de documento",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false
     }
@@ -83,6 +118,13 @@ function validarRegistro() {
             text:"Se debe ingresar un número de identificación valido",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -93,6 +135,13 @@ function validarRegistro() {
             text:"Se debe ingresar una dirección valida",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -103,6 +152,13 @@ function validarRegistro() {
             text:"Se debe ingresar un número de teléfono valido",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -114,6 +170,13 @@ function validarRegistro() {
             text:"Se debe ingresar un email con formato válido",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -124,6 +187,13 @@ function validarRegistro() {
             text:"Se debe ingresar un password con mas de 8 carateres",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false;
     }
@@ -133,6 +203,13 @@ function validarRegistro() {
             text:"Las contraseñas deben coincidir",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false
     }
@@ -142,6 +219,13 @@ function validarRegistro() {
             text:"tu registro ha sido exitoso",
             icon:"success",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
     }
     else{
@@ -150,6 +234,13 @@ function validarRegistro() {
             text:"Debes aceptar nuestras politicas de privacidad",
             icon:"error",
             confirmButtonText:"continuar",
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
         });
         return false
     }
@@ -163,35 +254,115 @@ function validarLogin(){
     var opcion = document.formularioLogin.condiciones;
 
     if(cedula.length < 8 || cedula.length > 10 || isNaN(cedula)){
-        alert('Se debe ingresar un número de identificación valido')
-        /*swal.fire({
+        swal.fire({
             title:"ERROR",
             text:"Se debe ingresar un número de identificación valido",
             icon:"error",
             confirmButtonText:"continuar",
-        });*/        
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
+        });      
         return false;
     }
 
     if(password.length < 8){
-        /*swal.fire({
+        swal.fire({
             title:"ERROR",
             text:"Se debe ingresar un password con mas de 8 carateres",
             icon:"error",
             confirmButtonText:"continuar",
-        });*/
-        alert('Se debe ingresar un password con mas de 8 carateres')
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
+        });
+        
         return false
     }
 
     if (opcion.checked == false){
-        /*swal.fire({
+        swal.fire({
             title:"ERROR",
             text:"Debes aceptar nuestras politicas de privacidad",
             icon:"error",
             confirmButtonText:"continuar",
-        });*/
-        alert('Debes aceptar nuestras politicas de privacidad')
+            backdrop: true,/* fondo */
+            timer: 10000,/* tiempo que permanece la alerta */
+            timerProgressBar:true,
+            allowOutsideClick:true,/* click a fuera */
+	        allowEscapeKey:true,
+	        allowEnterKey:true,
+	        stopKeydownPropagation:false,
+        });
+        
         return false;        
     }
 }
+/* Swal.fire({
+	// title:
+	// text:
+	// html:
+	// icon:error,warning,success,info,question
+	// confirmButtonText:
+	// footer:
+	// width:
+	// padding:
+	// background:
+	// grow:
+	// backdrop:
+	// timer:
+	// timerProgressBar:
+	// toast:
+	// position:
+	// allowOutsideClick:
+	// allowEscapeKey:
+	// allowEnterKey:
+	// stopKeydownPropagation:
+
+	// input:
+	// inputPlaceholder:
+	// inputValue:
+	// inputOptions:
+	
+	//  customClass:
+	// 	container:
+	// 	popup:
+	// 	header:
+	// 	title:
+	// 	closeButton:
+	// 	icon:
+	// 	image:
+	// 	content:
+	// 	input:
+	// 	actions:
+	// 	confirmButton:
+	// 	cancelButton:
+	// 	footer:	
+
+	// showConfirmButton:
+	// confirmButtonColor:
+	// confirmButtonAriaLabel:
+
+	// showCancelButton:
+	// cancelButtonText:
+	// cancelButtonColor:
+	// cancelButtonAriaLabel:
+	
+	// buttonsStyling:
+	// showCloseButton:
+	// closeButtonAriaLabel:
+
+
+	// imageUrl:
+	// imageWidth:
+	// imageHeight:
+	// imageAlt:
+}); */

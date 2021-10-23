@@ -5,19 +5,25 @@
 	<title>Iniciar Sesión</title> 
     <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <!-- Tipo de letra -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- conexion a css -->
 	<link rel="stylesheet" href="{{ url_for('static', filename = '../static/css/estilosLogin.css')}}">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     
 </head>  
 <body>
 
     
     <nav>
-        <a href="/inicio" class="nav-link">Inicio</a>
+        <a href="/inicio" class="nav-link"><b>Inicio</b></a>
         <a href="/inicio/busqueda" class="btn">
             <i class="fas fa-search"></i>
         </a>
@@ -48,6 +54,8 @@
         <p>¿Olvidaste la contraseña?<a class="link" href="/inicio/registro">Restaurar contraseña</a></p>
     </div>
     </form>
-    <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 
+
+    <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
