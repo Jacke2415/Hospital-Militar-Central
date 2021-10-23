@@ -263,4 +263,43 @@ def llenar_cita(cedula_paciente,_cedula_medico,fecha,hora,historia,calificacion,
     cursorObj.execute(strsql)
     con.commit()
     con.close()
+def Obteneridpaciente(cedula):
+    strsql = "select IdUsuario from Usuarios where NumeroIdentificacion='"+cedula+"';"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
 
+def Obteneridmedico(m2,m3):
+    strsql = "select IdUsuario from Usuarios where Nombre='"+m3+"' and Apellido='"+m2+"';"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
+
+def sql_CrearCita(paciente, medico, fecha, hora, historiaclinica,calificacion, comentarios, estado):
+    strsql = "insert into CITA(Paciente, Medico, Fecha, Hora, HistoriaClinica,Calificacion, ComentariosCalificacion, Estado) values ('"+paciente+"','"+medico+"', '"+fecha+"','"+hora+"', '"+historiaclinica+"', '"+calificacion+"', '"+comentarios+"', '"+estado+"');"
+    con = sql_connection()    
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    con.commit()
+    con.close()
+
+def DetallecitaPaciente(idcita1):
+    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql)
+    response = cursor.fetchall()
+    return response
+
+def ActualizarCitapormedico(Fecha,idcita1):
+    strsql = "update CITA set Fecha='"+Fecha+"' where IdCita='"+idcita1+"'"
+    con = sql_connection()    
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    con.commit()
+    con.close()
+    
