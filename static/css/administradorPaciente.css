@@ -648,6 +648,7 @@
 
 .contenedor-formato-tabla .table td{
     border-bottom: solid 1px var(--dt-border-color);
+    width: auto;
 }
 
 .contenedor-formato-tabla .table tbody tr:nth-child(even){
