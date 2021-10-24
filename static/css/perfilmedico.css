@@ -419,7 +419,31 @@ footer{
     padding-bottom: 50px;
     border-bottom: 1px solid #ebebeb;
 }
+#consultaid
+    {
+        position: relative;
+        right: -1380px;
+        top: -850px;
 
+    }
+#AceptarCancelar
+    {
+        position: relative;
+        right: 500px;
+        top: 590px;
+
+    }
+.buttonk{
+        border: none;
+        width: 100px;
+        color: #ebebeb;
+        font-size: 15px;
+        background:  #1a2537;
+        padding: 15px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px
+}
 .content-foo{
     text-align: center;
 }
@@ -492,4 +516,5 @@ footer{
     {
         font-size: 20px;
     }
+    
 }
