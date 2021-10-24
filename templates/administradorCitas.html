@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/dasboardMedico.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorCitas.css')}}">
     <title>Dashboard</title>
     <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
 </head>
@@ -119,18 +119,18 @@
     </svg>
     <header class="page-header">
         <nav>
-            <a href="/inicio" class="nav-link">Inicio</a>
+            <a href="/inicio" class="nav-link"><b>Inicio</b></a>
 
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Dashhboard Administrativo</h3>
+                    <h3>Perfil Administrativo</h3>
                 </li>
                 <li>
                     <a href="/inicio/iniciarSesion/administrador">
                         <svg>
                             <use xlink:href="#pages"></use>
                         </svg>
-                        <span>Dashboard</span>
+                        <span>Perfil Administrador</span>
                     </a>
                 </li>
                 <li>
@@ -194,12 +194,7 @@
                     <h3>Opciones</h3>
                 </li>
                 <li>
-                    <a href="#0">
-                        <svg>
-                            <use xlink:href="#settings"></use>
-                        </svg>
-                        <span>Configuración</span>
-                    </a>
+
                 </li>
                 <li>
                     <a href=/inicio/iniciarSesion/administrador/ayuda>
@@ -227,13 +222,13 @@
     </header>
     <section class="page-content">
         <section class="search-and-user">
-            <h1>Dashboard SuperAdmin</h1>
+            <h1>Administrador(a): {{ user.name }}</h1>
             <div class="admin-profile" id="header">
                 <div id="userbar">
                     <div><span>Bienvenido!</span></div>
-                    <div><span class="username">Administrador</span></div>
-                    <div><a href="/edit-profile.html">Ver perfil</a></div>
-                    <div><a href="https://www.Hospitalmilitar.com/_ah/logout?...">Cerrar sesion</a></div>
+                    <div><span class="username">{{ user.name }}</span></div>
+                    <div><a href="/inicio/iniciarSesion/administrador">Ver perfil</a></div>
+                    <div><a href="/logout">Cerrar sesion</a></div>
                 </div>
                 <div class="notifications">
                     <svg>
@@ -254,7 +249,9 @@
                             <input type="text" name="cedula" placeholder="Cedula a buscar">
                         </div>
                         <input type="submit" value="Buscar" class="button1" onclick="validaciondashboardmedico() ">
-                        <input type="button" value="Nuevo" class="button2" onclick="location='/inicio/iniciarSesion/administrador/medico/registroMedico'" />
+                        <input type="button" value="Nuevo" class="button2" onclick="location='/inicio/iniciarSesion/Paciente/solicitarcita'" />
+                        <input type="button" value="Actualizar" class="button1" onclick="location=''" />
+                        <input type="button" value="Eliminar" class="button2" onclick="location=''" />
                     </form>
                 </div>
             </section>

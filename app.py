@@ -73,8 +73,7 @@ def iniciarSesion():
 def busqueda():
     return render_template("busqueda.html")
 
-@app.route("/inicio/iniciarSesion/Paciente", methods = ['GET', 'POST'])
-def iniciarSesionPaciente():
+def user():
     cedula = cedula_init
     encontrado = db.sql_search_user(cedula)
     today = datetime.datetime.today()
@@ -89,6 +88,12 @@ def iniciarSesionPaciente():
             'tel': encontrado[0][11],
             'dir': encontrado[0][10]
             }
+    return user
+
+
+@app.route("/inicio/iniciarSesion/Paciente", methods = ['GET', 'POST'])
+def iniciarSesionPaciente():
+    cedula = cedula_init
     columnas = []
     
     busqueda_columnas= db.get_columnas_Cita()
@@ -114,8 +119,8 @@ def iniciarSesionPaciente():
     
     else:
         error = "Usuario no Tiene Citas"
-        return render_template("principalPaciente.html", user=user, error = error)
-    return render_template("principalPaciente.html", user=user, cedula=cedula, encontradas=encontradas, columnas=columnas, 
+        return render_template("principalPaciente.html", user = user(), error = error)
+    return render_template("principalPaciente.html", user=user(), cedula=cedula, encontradas=encontradas, columnas=columnas, 
     historial=historial)
     
     
@@ -168,31 +173,10 @@ def Cancelarcita():
         db.sql_actualizarestadocita(idcita,estado)
         Mensaje = "Su cita ha Sido Cancelada Exitosamente"
         return render_template("CancelarCita.html",cedula=cedula, Mensaje=Mensaje)
-        
-
-
-
-
 
 @app.route("/inicio/iniciarSesion/medico", methods=['POST', 'GET'])
 def iniciarSesionMedico():
-    
     cedula = cedula_init
-    encontrado = db.sql_search_user(cedula)
-    today = datetime.datetime.today()
-    fechaN = encontrado[0][4]
-    fechaN = datetime.datetime.strptime(fechaN, "%Y-%m-%d")
-    user = {
-            'name' : encontrado[0][2] + ' ' + encontrado[0][3],
-            'tipoId': encontrado[0][6],
-            'numId': encontrado[0][7],
-            'especialidad': encontrado[0][8],
-            'consultorio': encontrado[0][9],
-            'sexo': encontrado[0][5],
-            'edad': today.year - fechaN.year - ((today.month, today.day) < (fechaN.month, fechaN.day)),
-            'tel': encontrado[0][11],
-            'dir': encontrado[0][10]
-            }
     if request.method=='GET':
         columnas = []
         busqueda_columnas= db.get_columnas_Cita1()
@@ -204,7 +188,7 @@ def iniciarSesionMedico():
             for row in citas:
                 encontradas.append(row)
             app.logger.info(encontradas)
-        return render_template("principalMedico.html", user=user,encontradas=encontradas,columnas=columnas)
+        return render_template("principalMedico.html", user=user(),encontradas=encontradas,columnas=columnas)
     else:    
       
         Finicial=request.form['fechainicial']
@@ -222,8 +206,7 @@ def iniciarSesionMedico():
                 encontradas1.append(row)
             app.logger.info(encontradas1)
             
-        return render_template("principalMedico.html", user=user,encontradas1=encontradas1,columnas=columnas)
-        
+        return render_template("principalMedico.html", user=user(),encontradas1=encontradas1,columnas=columnas)
 
 @app.route("/inicio/iniciarSesion/medico/actualizarDatos", methods = ['GET', 'POST'])
 def actualizarDatos():
@@ -344,7 +327,7 @@ def medicocancelacita():
 
 @app.route("/inicio/iniciarSesion/administrador")
 def administrador():
-    return render_template("administrador.html")
+    return render_template("administrador.html", user = user())
 
 @app.route("/inicio/iniciarSesion/administrador/paciente",methods=['POST', 'GET'])
 def administradorPaciente():
@@ -360,7 +343,7 @@ def administradorPaciente():
     for row in dbpacientes:
         pacientes.append(row)
     if request.method == 'GET':
-        return render_template("administradorPaciente.html",columnas=columnas,pacientes=pacientes)
+        return render_template("administradorPaciente.html", user = user(), columnas=columnas, pacientes=pacientes)
     else:
         coincidencia = []
         global cedula_a_buscar_paciente 
@@ -370,12 +353,12 @@ def administradorPaciente():
             cond = True
             for i in range(len(busqueda_columnas)):
                 coincidencia.append(f'{busqueda_cedula[0][i]}')
-            return render_template("administradorPaciente.html", coincidencia=coincidencia, columnas=columnas,cond=cond)
+            return render_template("administradorPaciente.html", user=user(), coincidencia=coincidencia, columnas=columnas,cond=cond)
         else:
             error = f'El usuario con la identificacion {cedula_a_buscar_paciente} no se encuentra registrado '
-            return render_template("administradorPaciente.html", error = error)
+            return render_template("administradorPaciente.html", user=user(), error = error)
 
-@app.route("/eliminarPaciente", methods=['POST'])
+@app.route("/eliminarPaciente", methods=['POST', 'GET'])
 def eliminarPaciente():
     cedula_eliminar = cedula_a_buscar_paciente
     db.sql_delete_paciente(cedula_eliminar)
@@ -397,7 +380,7 @@ def administradorMedico():
         medicos.append(row)
     app.logger.info(medicos[1][3])
     if request.method == 'GET':
-        return render_template("administradorMedico.html",columnas=columnas,medicos=medicos)
+        return render_template("administradorMedico.html", user=user(), columnas=columnas,medicos=medicos)
     else:
         coincidencia = []
         global cedula_a_buscar_medico 
@@ -412,7 +395,7 @@ def administradorMedico():
             error = f'El usuario con la identificacion {cedula_a_buscar_medico} no se encuentra registrado '
             return render_template("administradorMedico.html", error = error)
 
-@app.route("/eliminarMedico", methods=['POST'])
+@app.route("/eliminarMedico", methods=["POST", "GET"])
 def eliminarMedico():
     cedula_eliminar = cedula_a_buscar_medico
     db.sql_delete_paciente(cedula_eliminar)
@@ -460,7 +443,7 @@ def administradorCitas():
         citas.append(row)
     
     if request.method == 'GET':
-        return render_template("administradorCitas.html",columnas=columnas,citas=citas)
+        return render_template("administradorCitas.html", user = user(), columnas=columnas,citas=citas)
     else:
         coincidencias = []
         cedula = request.form['cedula']
@@ -493,7 +476,7 @@ def administradordHClinica():
         hClinicas.append(row)
     
     if request.method == 'GET':
-        return render_template("administradorHistoriaClinica.html",columnas=columnas,hClinicas=hClinicas)
+        return render_template("administradorHistoriaClinica.html", user= user(),columnas=columnas,hClinicas=hClinicas)
     else:
         coincidencias = []
         cedula = request.form['cedula']
@@ -514,7 +497,7 @@ def administradordHClinica():
 
 @app.route("/inicio/iniciarSesion/administrador/agenda")
 def administradordAgenda():
-    return render_template("administradorAgenda.html")
+    return render_template("administradorAgenda.html", user=user())
 
 @app.route("/inicio/iniciarSesion/administrador/ayuda")
 def administradordAyuda():

@@ -12,9 +12,8 @@ body {
     background-attachment: fixed;
 }
 .contenedor{
-    width: 100%;
-    padding: 5px;
-    
+    width: auto;
+    padding: 10px;
 }
 
 nav{
@@ -27,6 +26,7 @@ nav > a{
     font-weight: 300;
     text-decoration: none;
     margin-right: 10px;
+    font-size: 25px;
 }
 
 nav > a:hover{
@@ -35,15 +35,25 @@ nav > a:hover{
 
 
 .formulario-login{
-    margin-top: 150px;
     background: #fff;
-    padding: 3px;
+    padding: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 150px;
+
 }
+
 .formulario-registro{
-    margin-top: 150px;
     background: #fff;
-    padding: 5px;
+    padding: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 200px;
+    top: 10px;
+
 }
+
+
 h1{
     text-align: center;
     color: #1a2537;
@@ -162,31 +172,3 @@ p{
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

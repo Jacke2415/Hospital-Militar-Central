@@ -103,27 +103,6 @@ body {
   background: var(--page-header-bgColor);
 }
 
-/*In case you prefer an absolutely positioned header that covers the full page height, add these styles*/
-/*body {
-  position: relative;
-}
-
-.page-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-}*/
-
-/*remove these styles*/
-/*.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: auto;
-}*/
 
 .page-header nav {
   display: flex;
@@ -594,5 +573,26 @@ SVG Icons - svgicons.sparkk.fr
   fill: #7d7d80;
   stroke: rgb(156, 139, 139);
   stroke-width: 1;
+}
+.contenedor-id{
+  font-weight: bold;
+  text-decoration-color: #1a2537;
+  margin-left: 27%;
+  width: 35%;
+  height: 100%;
+  padding: 30px;
+  border: 3px solid #1a2537;
+}
+.contenedor-imagen{
+  text-decoration-color: #1a2537;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+}
+img{
+  margin-left: 75%;
+  width: 200px;
+  overflow:auto;
 }
 

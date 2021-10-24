@@ -28,8 +28,6 @@
             <a href="/inicio" class="nav-link">Inicio</a>
             <a href="/inicio/registro" class="btn">Registrar</a>
             <a href="/inicio/iniciarSesion" class="btn">Iniciar Sesíon</a>
-            <a href="index.html" class="nav-link">Servicios</a>
-            <a href="index.html" class="nav-link">Contacto</a>
             <a href="/inicio/busqueda" class="btn">
                 <i class="fas fa-search"></i>
             </a>
@@ -57,66 +55,85 @@
                     <p>La coordinación de Hospitalización mantiene comunicación permanente con las diferentes Direcciones de Sanidad de las F.F.M.M. (Ejército Nacional, Fuerza Aérea y Armada Nacional) quienes son los aseguradores, el HOMIL es la institución de alta complejidad que presta los servicios de salud para sus asegurados.</p>
                 </div>
             </div>
+        </section>
+    </main>
 
+    
+        <h1 class="titulo">Galería</h1>
+        <span class="linea"></span>
+        
         <section class="galeria">
+            
 
-            <div class="contenedor">
-                <h2 class="titulo">Galería</h2>
+            <a href="#image1">
+                <img src="{{url_for('static', filename = 'img/galeria1.jpeg')}}" alt="">
+            </a>
 
-                <div class="galeria-port">
+            <a href="#image2">
+                <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
+            </a>
 
-                    <div class="imagen-port">
-                        <img src="{{ url_for('static', filename = 'img/galeria1.jpeg')}}" alt="">
-                        <div class="hover-galeria">
-                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
-                            <p>Nuestro trabajo</p>
-                        </div>
-                    </div>
+            <a href="#image3">
+                <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
+            </a>
 
-                    <div class="imagen-port">
-                        <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
-                        <div class="hover-galeria">
-                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
-                            <p>Nuestro trabajo</p>
-                        </div>
-                    </div>
+            <a href="#image4">
+                <img src="{{ url_for('static', filename = 'img/galeria.jpeg')}}" alt="">
+            </a>
 
-                    <div class="imagen-port">
-                        <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
-                        <div class="hover-galeria">
-                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
-                            <p>Nuestro trabajo</p>
-                        </div>
-                    </div>
+            <a href="#image5">
+                <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
+            </a>
 
-                    <div class="imagen-port">
-                        <img src="{{ url_for('static', filename = 'img/galeria.jpeg')}}" alt="">
-                        <div class="hover-galeria">
-                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
-                            <p>Nuestro trabajo</p>
-                        </div>
-                    </div>
-
-                    <div class="imagen-port">
-                        <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
-                        <div class="hover-galeria">
-                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
-                            <p>Nuestro trabajo</p>
-                        </div>
-                    </div>
-
-                    <div class="imagen-port">
-                        <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
-                        <div class="hover-galeria">
-                            <img src="{{ url_for('static', filename = 'img/icono1.jpeg')}}" alt="">
-                            <p>Nuestro trabajo</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <a href="#image6">
+                <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
+            </a>
 
         </section>
+
+        <article class="light-box" id="image1">
+            <a href="#image6" class="next"><i class="fas fa-arrow-left"></i></a>
+            <img src="{{url_for('static', filename = 'img/galeria1.jpeg')}}" alt="">
+            <a href="#image2" class="next"><i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="close">X</a>
+        </article>
+
+        <article class="light-box" id="image2">
+            <a href="#image1" class="next"><i class="fas fa-arrow-left"></i></a>
+            <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
+            <a href="#image3" class="next"><i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="close">X</a>
+        </article>
+
+        <article class="light-box" id="image3">
+            <a href="#image2" class="next"><i class="fas fa-arrow-left"></i></a>
+            <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
+            <a href="#image4" class="next"><i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="close">X</a>
+        </article>
+
+        <article class="light-box" id="image4">
+            <a href="#image3" class="next"><i class="fas fa-arrow-left"></i></a>
+            <img src="{{ url_for('static', filename = 'img/galeria.jpeg')}}" alt="">
+            <a href="#image5" class="next"><i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="close">X</a>
+        </article>
+
+        <article class="light-box" id="image5">
+            <a href="#image4" class="next"><i class="fas fa-arrow-left"></i></a>
+            <img src="{{ url_for('static', filename = 'img/galeria2.jpeg')}}" alt="">
+            <a href="#image6" class="next"><i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="close">X</a>
+        </article>
+
+        <article class="light-box" id="image6">
+            <a href="#image5" class="next"><i class="fas fa-arrow-left"></i></a>
+            <img src="{{ url_for('static', filename = 'img/galeria3.jpeg')}}" alt="">
+            <a href="#image1" class="next"><i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="close">X</a>
+        </article>
+    
+        
 
         <section class="clientes contenedor">
 
@@ -140,28 +157,26 @@
                 </div>
 
             </div>
-
         </section>
 
-    </main>
-
-    <footer>
-        <div class="contenedor-footer">
-            <div class="content-foo">
-                <h4>Phone</h4>
-                <p>........</p>
-            </div>
-            <div class="content-foo">
-                <h4>Email</h4>
-                <p>.......</p>
-            </div>
-            <div class="content-foo">
-                <h4>Location</h4>
-                <p>......</p>
-            </div>
-        </div>
-        <h2 class="titulo-final">&copy; Team 5 Cliclo 3 | Mision Tic</h2>
-    </footer>
-
 </body>
+
+<footer>
+    <div class="contenedor-footer">
+        <div class="content-foo">
+            <h4>Phone</h4>
+            <p>........</p>
+        </div>
+        <div class="content-foo">
+            <h4>Email</h4>
+            <p>.......</p>
+        </div>
+        <div class="content-foo">
+            <h4>Location</h4>
+            <p>......</p>
+        </div>
+    </div>
+    <h2 class="titulo-final">&copy; Team 5 Cliclo 3 | Mision Tic</h2>
+</footer>
+
 </html>

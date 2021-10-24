@@ -57,6 +57,7 @@ nav > a{
     font-weight: 300;
     text-decoration: none;
     margin-right: 10px;
+    font-size: 20px;
 }
 
 nav > a:hover{
@@ -133,58 +134,96 @@ main .sobre-nosotros{
 
 /* Galeria */
 
-
-.galeria{
-    background: #f2f2f2;
-}
-
-.galeria-port{
-    display: flex;
-    justify-content:space-between ;
-    flex-wrap: wrap;
-}
-
-.imagen-port{
-    width: 30%;
-    margin-bottom: 20px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    box-shadow: 0 0 6px 0 rgb(12, 8, 243);
-}
-
-.imagen-port > img{
+.linea{
+    background:#667eea;
+    height: 5px;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
 }
 
-.hover-galeria{
-    position: absolute;
+.galeria{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(450px, 1fr));
+    width: 95%;
+    margin: auto;
+    grid-gap: 20px;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.galeria > a{
+    display: block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+}
+
+.galeria img{
     width: 100%;
-    height: 100%;
+    vertical-align: top;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+/* animacion y distorcion */
+.galeria a:hover img{
+    filter: blur(2px);
+    transform: rotate(10deg) scale(1.3);
+}
+
+.light-box{
+    position: fixed;
     top: 0;
-    transform: scale(0);
-    background: rgba(14, 6, 132, 0.7);
-    transition: transform .5s;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: tramsform .3s ease-in-out;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    transform: scale(0);
 }
 
-.hover-galeria img{
-    width: 100px;
+.light-box img{
+    width: 75vw;
+    max-width: 70vh;
 }
 
-.hover-galeria p{
-    color: #fff;
-}
-
-.imagen-port:hover .hover-galeria{
+.light-box:target{
     transform: scale(1);
 }
+
+.close{
+    display: block;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: #851919;
+    color: #fff;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+}
+
+.next{
+    display: block;
+    background: #851919;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50%;
+}
+
+
 
 /* Clients */
 
@@ -282,11 +321,17 @@ footer{
         width: auto;
     }
 
-    /* Galeria */
-
-    .imagen-port{
-        width: 50%;
+    /* galeia */
+    .galeria{
+        grid-template-columns: repeat(auto-fit, minmax(600px,1fr));
     }
+
+
+    .close{
+        top: 60px;
+        right: 60px;
+    }
+
 
     /* Clientes */
 
@@ -304,7 +349,7 @@ footer{
         margin-bottom: 30px;
     }
 
-@media screen and (max-width:500px)
+@media screen and (max-width:400px)
 {
     nav
     {
@@ -340,12 +385,16 @@ footer{
         width: 100%;
     }
 
-    /* Galeria */
-
-    .imagen-port
-    {
-        width: 95%;
+    /* galeia */
+    .galeria{
+        grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
     }
+
+    .close{
+        top: 20px;
+        right: 20px;
+    }
+
 
     /* Que dicen nuestros usuarios */
 
