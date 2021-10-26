@@ -59,6 +59,21 @@ h1{
     color: #1a2537;
     font-size: 40px;
 }
+.error{
+    margin-left: 3%;
+    text-align: left;
+    font-size: x-small;
+    color: rgb(241, 28, 241);    
+}
+.linkerror{
+    text-decoration: none;
+    color: rgb(241, 28, 241);
+    font-weight: 600;
+}
+.linkerror:hover{
+    color: deeppink;
+}
+
 select{
     align-items: center;
     text-decoration: none;

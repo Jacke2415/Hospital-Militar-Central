@@ -14,13 +14,13 @@
 
 </head>  
 <body>
-<form action=""
-method="POST"
-name="formularioRegistro"
-class="formulario-registro"
-onsubmit="return validarRegistro()">
+    <form action=""
+    method="POST"
+    name="formularioRegistro"
+    class="formulario-registro"
+    onsubmit="return validarRegistro()">
     
-    <h1>Registro</h1>
+        <h1>Registro</h1>
 
         <li>El usuario y contraseña serán enviados al correo  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del Medico suministrado.</li>
         <li>Todos los campos son obligatorios.</li>
@@ -103,12 +103,14 @@ onsubmit="return validarRegistro()">
         <div class="input-contenedor">
         <i class="fas fa-key icon"></i>
         <input type="password" name="passwordC" placeholder="Confirmar Contraseña">
-        </div>
-        
+        </div>        
         <input type="submit" value="Registrar" class="button">
-        
-    </div>
+        </div>
+        <div class="error">
+            <p a>{{ error }} <a class = "linkerror" href="{{ href }}">{{ link }}</a></p>
+        </div>
     </form>
-    <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script>
+<script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

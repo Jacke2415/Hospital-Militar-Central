@@ -254,17 +254,17 @@
 
                         <input type="button" value="Nuevo" class="button" onclick="location='/inicio/registro'" />
                         
-                        <input type="button" value="Actualizar" class="button" onclick="location='/inicio/iniciarSesion/medico/actualizarDatos'" />
+                        <input type="button" value="Actualizar" class="button" onclick="location='/inicio/iniciarSesion/actualizarDatos'" />
 
-                        <input type="button" value="Eliminar" class="button" onclick="location='/eliminarPaciente'" />
+                        <input type="button" value="Eliminar" class="button" onclick="location='/inicio/iniciarSesion/administrador/eliminarPaciente'" />
                     </form>
                 </div>
             
 
                 <div class="error">
                     <h2>{{ error }}</h2>
-                    </div>
-            
+                </div>
+                            
                 <div class="table">
                     <table style="width:100%">
                         <tr>
@@ -274,7 +274,7 @@
                         </tr>
                         {% for paciente in pacientes%}
                         <tr>
-                            {% for item in paciente%}
+                            {% for item in paciente %}
                             <td>{{ item }}</td> 
                             {% endfor %}
                         </tr>
