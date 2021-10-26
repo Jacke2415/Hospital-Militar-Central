@@ -52,6 +52,9 @@
         <input type="submit" value="Iniciar Sesión" class="button">
         <p>¿No tienes una cuenta?<a class="link" href="/inicio/registro">Registrate </a></p>
         <p>¿Olvidaste la contraseña?<a class="link" href="/inicio/registro">Restaurar contraseña</a></p>
+        <div class="error">
+            <p a>{{ error }} <a class = "linkerror" href=" {{ href }}">{{ link }}</a></p>
+        </div>
     </div>
     </form>
 

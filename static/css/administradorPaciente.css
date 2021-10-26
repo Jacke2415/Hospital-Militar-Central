@@ -19,7 +19,35 @@
     --switch-sunColor: gold;
     --switch-moonColor: #f4f4f4;
     --switch-bgDarkModeColor: #1f1f27;
-    }
+    
+    --primary-color: white;
+    --secondary-color:rgb(61, 68,73);
+    --highlight-color:#3282b8;
+
+    --dt-status-available-color:greenyellow;
+    --dt-status-away-color: lightsalmon;
+    --dt-status-offline-color: lightgray;
+
+    --dt-padding: 12px;
+    --dt-padding-s: 6px;
+    --dt-padding-xs: 2px;
+
+    --dt-border-radius: 3px;
+
+    --dt-background-color-container:#2a3338;
+    --dt-border-color:var(--secondary-color);
+    --dt-bg-color: var(--highlight-color);
+    --dt-text-color: var(--primary-color);
+    --dt-bg-active-button: var(--highlight-color);
+    --dt-text-color-button: var(--primary-color);
+    --dt-text-color-active-button: var(--primary-color);
+    --dt-hover-cell-color: var(--highlight-color);
+    --dt-even-row-color: var(--secondary-color);
+    --dt-focus-color: var(--highlight-color);
+    --dt-input-background-color: var(--secondary-color);
+    --dt-input-color: var(--primary-color);
+}
+    
 
     * {
     padding: 0;
@@ -575,3 +603,77 @@
     stroke-width: 1;
     }
 
+/*Tabla*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+sans&display=swap');
+
+.contenedor-formato-tabla{
+    font-family: 'Noto Sans',sans-serif;
+    background-color: #fefefe;
+    border-radius: var(--dt-border-radius);
+    color: #1a2537;
+    width: auto;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.contenedor-formato-tabla .button{
+    margin-top: 1%;
+    margin-left: auto;
+    border: none;
+    width:auto;
+    color: white;
+    font-size: 20px;
+    background:  #1a2537;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.contenedor-formato-tabla .button:hover, .button1:hover{
+    background: cadetblue;
+}
+
+.contenedor-formato-tabla .contenedor{
+    border-bottom: solid 1px var(--dt-border-color);
+    padding: var(--dt-padding);
+    display: flex;
+    align-items: baseline;
+}
+
+.contenedor-formato-tabla .table th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: solid 1px var(--dt-border-color);
+}
+
+.contenedor-formato-tabla .table td{
+    border-bottom: solid 1px var(--dt-border-color);
+    width: auto;
+}
+
+.contenedor-formato-tabla .table tbody tr:nth-child(even){
+    background-color: #b9b9b8;
+}
+
+.contenedor-formato-tabla .table tbody tr:hover{
+    background-color: var(--dt-hover-cell-color);
+}
+
+.contenedor-formato-tabla .contenedor .input-contenedor{
+    margin-bottom: 25px;
+    border: 1px solid #aaa;
+    font-size: 25px;
+}
+
+.contenedor-formato-tabla .contenedor .input-contenedor text{
+    margin-bottom: 25px;
+    border: 1px solid #aaa;
+    font-size: 25px;
+}
+
+input[type="text"],
+input[type="password"]{
+    font-size: 20px;/* tamaño letra */
+    width: 100%;
+    padding: 10px;
+    border: none;

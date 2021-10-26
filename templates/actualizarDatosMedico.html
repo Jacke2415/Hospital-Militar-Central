@@ -103,13 +103,16 @@ onsubmit="return validarRegistro()">
         <div class="input-contenedor">
         <i class="fas fa-key icon"></i>
         <input type="password" name="passwordC" placeholder="Confirmar Contraseña">
-        </div>
-
-        
+        </div>        
         <input type="submit" value="Actualizar Datos" class="button">
-        
-    </div>
-    </form>
+        </div>
+        <div class="error">
+            <p a>{{ error }} <a class = "linkerror" href="{{ href }}">{{ link }}</a></p>
+        </div>
+        <div class="error">
+            <p a>{{ error1 }} <a class = "linkerror" href="{{ href1 }}">{{ link1 }}</a></p>
+        </div>
+</form>
     <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@ def sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, e
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def sql_delete_user(cedula):
     strsql = 'delete from Usuarios where NumeroIdentificacion = ?',(cedula,) 
@@ -39,7 +39,7 @@ def sql_delete_user(cedula):
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def sql_delete_paciente(cedula):
     strsql = 'DELETE FROM Usuarios WHERE NumeroIdentificacion=?', (cedula,)
