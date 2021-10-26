@@ -93,16 +93,14 @@
                                 </li>
                                 <li>
                                     <button>
-                                        <button type="submit" name="consultar" id="consultar" onclick="validarfecha()" >Consultar
+                                        <button type="submit" name="consultar" onclick="validarfecha()" >Consultar
                                     </button>
                                 </li>
                             </ul>
                             
                         </div>
         
-                        <div class="search">
-                            <input type="text" name="" id="" class="search-input">
-                        </div>
+                        
                     </div>
         
                         <table class="datatable">
@@ -137,10 +135,16 @@
                             </tbody>
                         </table>
                         
-                <input type="button" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/detalleCita'" >
+                
             </div>
         </div>
+        <input type="text" name="detallecita" id="consultaid" class="search-input">
+        
+        <input type="button" id="consultaid" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'"  />
     </form>
+    <div class="search">
+        
+    </div>
 </body>
 <footer>
     <div class="contenedor-footer">

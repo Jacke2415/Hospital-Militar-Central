@@ -224,13 +224,13 @@ def get_Medicos1():
     response = cursor.fetchall()
     return response
 
-def sql_actualizarestadocita(idcita):
-    strsql = 'update CITA set Estado= ? where idcita= ? and Estado = ?',('Cancelada', idcita, 'Pendiente',)
+def sql_actualizarestadocita(idcita1,estado):
+    strsql = 'update CITA set Estado= ? where idcita= ? and Estado = ?',(estado, idcita1, 'Pendiente',)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)
     con.commit()
-    con.close()
+    
 
 def get_columnas_Cita1():  
     strsql = "select Idcita,Paciente,Fecha,Hora,Estado from CITA"
@@ -287,19 +287,21 @@ def sql_CrearCita(paciente, medico, fecha, hora, historiaclinica,calificacion, c
     con.commit()
     con.close()
 
-def DetallecitaPaciente(idcita1):
-    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
-    con =sql_connection()
-    cursor = con.cursor()
-    cursor.execute(strsql)
-    response = cursor.fetchall()
-    return response
-
 def ActualizarCitapormedico(Fecha,idcita1):
     strsql = "update CITA set Fecha='"+Fecha+"' where IdCita='"+idcita1+"'"
     con = sql_connection()    
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+
+def DetallecitaPaciente(idcita1):
+    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
+
+
+    
     
