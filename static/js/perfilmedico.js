@@ -12,7 +12,7 @@ function validarfecha() {
   
 function habilitarinputs(){
   document.getElementById('fecha').disabled=false
-  document.getElementById('hora').disabled=false
+  document.getElementById('fechaC').disabled=false
   
  
 } 

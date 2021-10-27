@@ -303,6 +303,9 @@ body {
   grid-column: 1 / -1;
 }
 
+/*.links-ayuda{
+
+}*/
 
 /* MQ RULES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -595,4 +598,21 @@ img{
   width: 200px;
   overflow:auto;
 }
+.preguntas{
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid #aaa;
+  padding: auto;
+  font-size: 25px;
+}
+.links-ayuda{
+  text-decoration: none;
+  color: #1a2537;
+  font-weight: 600;
+  
+} 
+.links-ayuda:hover{
+  color: cadetblue;
+}
+
 

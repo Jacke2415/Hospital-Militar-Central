@@ -23,7 +23,7 @@ def sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoDocumento, cedula, 
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo,contraseña, cedulae):
     strsql = 'update Usuarios set TipoUsuario = ?, Nombre = ?, Apellido = ?, FechaNacimiento =?, Sexo =?, TipoIdentificacion = ?, NumeroIdentificacion = ?, Especialidad = ?, Consultorio = ?, Direccion = ?, Telefono = ?, Correo = ?, Contraseña = ? where NumeroIdentificacion = ?', (tipo, nombre, apellido, fechaN,sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, generate_password_hash(contraseña), cedulae,)
@@ -31,7 +31,7 @@ def sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, e
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def sql_delete_user(cedula):
     strsql = 'delete from Usuarios where NumeroIdentificacion = ?',(cedula,) 
@@ -39,19 +39,26 @@ def sql_delete_user(cedula):
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    con.close()
+    #con.close()
 
-def sql_delete_paciente(cedula):
-    strsql = 'DELETE FROM Usuarios WHERE NumeroIdentificacion=?', (cedula,)
+def sql_eliminarCita(idcita):
+    strsql = 'delete from CITA where IdCita = ?',(idcita,) 
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    print("usuario eliminado")
-    con.close()
+    
 #listo
 def sql_search_user(cedula):
     strsql = 'select * from Usuarios where NumeroIdentificacion = ?',(cedula,)
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(*strsql)
+    response = cursor.fetchall()
+    return response
+
+def sql_search_name_user(id):
+    strsql = 'select * from Usuarios where IdUsuario = ?',(id,)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)
@@ -108,7 +115,7 @@ def getHClinica():
 
 # Obtener Historia CLinica del lado del admin
 def sql_search_Hclinica(cedula_usuario):
-    strsql = 'select HClinica.IdHistoriaC, Usuarios.NumeroIdentificacion, CITA.HistoriaClinica from HClinica, Usuarios, CITA where Usuarios.NumeroIdentificacion=? and',(cedula_usuario)
+    strsql = 'SELECT HClinica.IdHistoriaC,HClinica.Paciente, HClinica.Hclinica from HClinica JOIN Usuarios on Hclinica.Paciente = Usuarios.IdUsuario where Usuarios.NumeroIdentificacion=?',(cedula_usuario,)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)
@@ -117,10 +124,10 @@ def sql_search_Hclinica(cedula_usuario):
     
 # Obtener citas del lado del admin
 def sql_search_citas_admin(cedula_usuario):
-    strsql = "select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= '"+cedula_usuario+"' ;"
+    strsql = "select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= ?", (cedula_usuario,) 
     con =sql_connection()
     cursor = con.cursor()
-    cursor.execute(strsql)
+    cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
 
@@ -191,6 +198,7 @@ def sql_search_citaspacientes(cedula):
     cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
+
 #listo
 def sql_search_Historialcitas(cedula):
     strsql = 'select Idcita,Medico,Fecha,Hora,Estado from CITA JOIN Usuarios  ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion = ? and CITA.Estado != ?',(cedula,'Pendiente',)
@@ -224,13 +232,13 @@ def get_Medicos1():
     response = cursor.fetchall()
     return response
 
-def sql_actualizarestadocita(idcita):
-    strsql = 'update CITA set Estado= ? where idcita= ? and Estado = ?',('Cancelada', idcita, 'Pendiente',)
+def sql_actualizarestadocita(idcita1,estado):
+    strsql = 'update CITA set Estado= ? where idcita= ? and Estado = ?',(estado, idcita1, 'Pendiente',)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)
     con.commit()
-    con.close()
+    
 
 def get_columnas_Cita1():  
     strsql = "select Idcita,Paciente,Fecha,Hora,Estado from CITA"
@@ -262,7 +270,7 @@ def llenar_cita(cedula_paciente,_cedula_medico,fecha,hora,historia,calificacion,
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+    #con.close()
 def Obteneridpaciente(cedula):
     strsql = "select IdUsuario from Usuarios where NumeroIdentificacion='"+cedula+"';"
     con =sql_connection()
@@ -285,15 +293,7 @@ def sql_CrearCita(paciente, medico, fecha, hora, historiaclinica,calificacion, c
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
-
-def DetallecitaPaciente(idcita1):
-    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
-    con =sql_connection()
-    cursor = con.cursor()
-    cursor.execute(strsql)
-    response = cursor.fetchall()
-    return response
+    #con.close()
 
 def ActualizarCitapormedico(Fecha,idcita1):
     strsql = "update CITA set Fecha='"+Fecha+"' where IdCita='"+idcita1+"'"
@@ -301,5 +301,15 @@ def ActualizarCitapormedico(Fecha,idcita1):
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+
+def DetallecitaPaciente(idcita1):
+    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
+
+
+    
     

@@ -109,10 +109,14 @@
             <i class="fas fa-key icon"></i>
             <input type="password" name="passwordC" placeholder="Confirmar Contraseña">
             </div>
-
+            <div>
             <p><input type="checkbox" name="condicionesr" />Al registrarte, aceptas nuestras Condiciones &nbsp;&nbsp;&nbsp; de uso y Política de privacidad.</p>
             <input type="submit" value="Registrate" class="button">
-            <p a>¿Ya estas registado?&nbsp;&nbsp;<a class="link" href="/inicio/iniciarSesion">Iniciar Sesion</a></p>
+            </div>
+            <!--<p a>¿Ya estas registado?&nbsp;&nbsp;<a class="link" href="/inicio/iniciarSesion">Iniciar Sesion</a></p>-->
+            <div class="error">
+                <p a>{{ error }} <a class = "linkerror" href = "{{ href }}">{{ link }}</a></p>
+            </div>
         </div>
 
     </form>

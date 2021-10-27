@@ -108,7 +108,7 @@
                         <svg>
                             <use xlink:href="#pages"></use>
                         </svg>
-                        <span>Panel Administrativo</span>
+                        <span>Perfil Administrador</span>
                     </a>
                 </li>
                 <li>
@@ -200,12 +200,16 @@
         </header>
         <section class="page-content">
             <section class="search-and-user">
-                <h1>{{ user.name }}</h1>
+                {% if user.sexo_is_Femenino %}
+                    <h1>Administradora: {{ user.name }}</h1>
+                {% else %}
+                    <h1>Administrador: {{ user.name }}</h1>
+                {% endif %}
             <div class="admin-profile" id="header">
                 <div id="userbar">
                     <div><span>Bienvenido!</span></div>
                     <div><span class="username">{{ user.name }}</span></div>
-                    <div><a href="/edit-profile.html">Ver perfil</a></div>
+                    <div><a href="/inicio/iniciarSesion/administrador">Ver perfil</a></div>
                     <div><a href="/logout">Cerrar sesion</a></div>
                 </div>
                 <div class="notifications">

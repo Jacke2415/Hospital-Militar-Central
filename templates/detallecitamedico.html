@@ -55,7 +55,7 @@
     
     <section class="contenedor-formato-tabla">
 
-        <form action="" method = "POST" name ="detallemedico" class ="formulario-login" onsubmit = "return validarLogin()">
+        <form action="" method = "post" name ="detallemedico" class ="formulario-login" onsubmit = "return validarLogin()">
 
             <div class="contenedor">  
 
@@ -82,19 +82,28 @@
                 </div>
 
                 <div class="input-contenedor">
-                    <input type ="date" name ="FechaC" id="hora" placeholder="" disabled="true">
+                    <input type ="date" name ="FechaC" id="fechaC" placeholder="" disabled="true">
                 </div>
         
 
-
+                
                 <input type="submit" name="action" value="Guardar" class="button1">
-                <input type="button" name="action" value="Editar" class="button2" onclick="habilitarinputs()  ">
-                <input type="submit" name="action" value="Aceptar" class="button1" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita/Aceptarcita'" >
-                <input type="submit" name="action" value="Cancelar" class="button3">
+                <input type="button" value="Editar" class="button2" onclick="habilitarinputs()  ">
+                
+                
+                
 
             </div>
+            {{ Mensaje }}
         </form>
-        {{ Mesaje }}
+        <form id="AceptarCancelar" action="/inicio/iniciarSesion/medico/Verdetallecita/aceptarcita" method="post" >
+            <input type="submit" name="action" value="Aceptar" class="buttonk" > 
+        </form>
+   
+        <form id="AceptarCancelar" action="/inicio/iniciarSesion/medico/Verdetallecita/cancelarcita" method="post" >
+            <input type="submit" name="action" value="Cancelar" class="buttonk">    
+        </form>
+        
         <div class="contenedor-historia-clinica">
             <!-- Texto dentro Historia clinica -->
             <textarea name="historiaclinica" id="textarea" cols="30" rows="10">

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorCitas.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorPaciente.css')}}">
     <title>Dashboard</title>
     <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
 </head>
@@ -123,14 +123,14 @@
 
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Dashhboard Administrativo</h3>
+                    <h3>Perfil Administrativo</h3>
                 </li>
                 <li>
                     <a href="/inicio/iniciarSesion/administrador">
                         <svg>
                             <use xlink:href="#pages"></use>
                         </svg>
-                        <span>Dashboard</span>
+                        <span>Perfil Administrador</span>
                     </a>
                 </li>
                 <li>
@@ -222,13 +222,13 @@
     </header>
     <section class="page-content">
         <section class="search-and-user">
-            <h1>Dashboard SuperAdmin</h1>
+            <h1>Administrador(a): {{ user.name }}</h1>
             <div class="admin-profile" id="header">
                 <div id="userbar">
                     <div><span>Bienvenido!</span></div>
-                    <div><span class="username">Administrador</span></div>
-                    <div><a href="/edit-profile.html">Ver perfil</a></div>
-                    <div><a href="https://www.Hospitalmilitar.com/_ah/logout?...">Cerrar sesion</a></div>
+                    <div><span class="username">{{ user.name }}</span></div>
+                    <div><a href="/inicio/iniciarSesion/administrador">Ver perfil</a></div>
+                    <div><a href="/logout">Cerrar sesion</a></div>
                 </div>
                 <div class="notifications">
                     <svg>
@@ -239,22 +239,21 @@
 
         </section>
         <div>
+            <h1>Citas</h1>
             <!--Aqui va el contenido-->
             <section class="contenedor-formato-tabla">
-                <div class="contenedor">
-                    <h1>Citas</h1>
+                <div class="contenedor"> 
+
                     <form action="/inicio/iniciarSesion/administrador/citas" method='POST'>
                         <div class="input-contenedor">
-                            <i class="fas fa-envelope icon"></i>
-                            <input type="text" name="cedula" placeholder="Cedula a buscar">
+                            <input type="text" name="cedula" placeholder="cédula del paciente">
                         </div>
-                        <input type="submit" value="Buscar" class="button1" onclick="validaciondashboardmedico() ">
-                        <input type="button" value="Nuevo" class="button2" onclick="location='/inicio/iniciarSesion/Paciente/solicitarcita'" />
-                        <input type="button" value="Actualizar" class="button1" onclick="location=''" />
-                        <input type="button" value="Eliminar" class="button2" onclick="location=''" />
+                        <input type="submit" value="Buscar" class="button" onclick="validaciondashboardmedico() ">
+                        <input type="button" value="Nuevo" class="button" onclick="location='/inicio/iniciarSesion/administrador/solicitarcita'" />
+                        <!--<input type="button" value="Actualizar" class="button" onclick="location=''" />-->
+                        <input type="button" value="Eliminar" class="button" onclick="location='/inicio/iniciarSesion/administrador/eliminarCitaAdministrador'" />
                     </form>
                 </div>
-            </section>
             <div class="error">
                 <h2>{{ error }}</h2>
             </div>
@@ -280,8 +279,8 @@
                     </tr>
                     {% endfor %}
                   </table>
-                  
-            </div>
+                </div>
+            </section>
         </div>
         <footer class="page-footer">
             <span>Desarrollado por G38Team5 </span>

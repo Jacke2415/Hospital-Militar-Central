@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/dashstyle.css')}}">
-        <title>Dashboard</title>
+        <title>Administrador</title>
         <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
     </head>
     <body>
@@ -101,14 +101,14 @@
 
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Dashhboard Administrativo</h3>
+                    <h3>Perfil Administrativo</h3>
                 </li>
                 <li>
                     <a href="/inicio/iniciarSesion/administrador">
                         <svg>
                             <use xlink:href="#pages"></use>
                         </svg>
-                        <span>Dashboard</span>
+                        <span>Perfil Administrador</span>
                     </a>
                 </li>
                 <li>
@@ -200,13 +200,13 @@
         </header>
         <section class="page-content">
             <section class="search-and-user">
-                <h1>Dashboard SuperAdmin</h1>
+                <h1>Administrador(a): {{ user.name }}</h1>
             <div class="admin-profile" id="header">
                 <div id="userbar">
                     <div><span>Bienvenido!</span></div>
-                    <div><span class="username">Administrador</span></div>
-                    <div><a href="/edit-profile.html">Ver perfil</a></div>
-                    <div><a href="https://www.Hospitalmilitar.com/_ah/logout?...">Cerrar sesion</a></div>
+                    <div><span class="username">{{ user.name }}</span></div>
+                    <div><a href="/inicio/iniciarSesion/administrador">Ver perfil</a></div>
+                    <div><a href="/logout">Cerrar sesion</a></div>
                 </div>
                 <div class="notifications">
                     <svg>
@@ -230,7 +230,7 @@
                     <a href="" class="links-ayuda"><p>Gestionar de Pacientes</p></a>
                     <a href="" class="links-ayuda"><p>Gestionar de Medicos</p></a>
                     <a href="" class="links-ayuda"><p>Gestionar de Citas</p></a>
-                    
+                    </br>
                     <h2>Necesitas Soporte Tecnico?</h2>
                     <p>Comuniquese con nuestra mesa de ayuda al 316-3222222.</p> 
                     <p>Correo electronico: <a href="mailto:correo@gmail.com">mesaayuda@hospitalmilitar.gov.co</a></p>

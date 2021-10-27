@@ -123,14 +123,14 @@
 
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Dashhboard Administrativo</h3>
+                    <h3>Panel Administrativo</h3>
                 </li>
                 <li>
                     <a href="/inicio/iniciarSesion/administrador">
                         <svg>
                             <use xlink:href="#pages"></use>
                         </svg>
-                        <span>Dashboard</span>
+                        <span>Perfil Administrador</span>
                     </a>
                 </li>
                 <li>
@@ -222,13 +222,13 @@
     </header>
     <section class="page-content">
         <section class="search-and-user">
-            <h1>Dashboard SuperAdmin</h1>
+            <h1>Administrador(a): {{ user.name }}</h1>
             <div class="admin-profile" id="header">
                 <div id="userbar">
                     <div><span>Bienvenido!</span></div>
-                    <div><span class="username">Administrador</span></div>
-                    <div><a href="/edit-profile.html">Ver perfil</a></div>
-                    <div><a href="https://www.Hospitalmilitar.com/_ah/logout?...">Cerrar sesion</a></div>
+                    <div><span class="username">{{ user.name }}</span></div>
+                    <div><a href="/inicio/iniciarSesion/administrador">Ver perfil</a></div>
+                    <div><a href="/logout">Cerrar sesion</a></div>
                 </div>
                 <div class="notifications">
                     <svg>
@@ -239,52 +239,59 @@
 
         </section>
         <div>
+            <h1>Pacientes</h1>
             <!--Aqui va el contenido-->
             <section class="contenedor-formato-tabla">
                 <div class="contenedor">
-                    <h1>Pacientes</h1>
+                    
                     <form action="/inicio/iniciarSesion/administrador/paciente" method="POST">
                         <div class="input-contenedor">
                             <i class="fas fa-envelope icon"></i>
                             <input type="text" name="cedula" placeholder="Número de identificación">
                         </div>
-                        <input type="submit" value="Buscar" class="button1" onclick="validaciondashboardmedico() ">
-                        <input type="button" value="Nuevo" class="button2" onclick="location='/inicio/registro'" />
-                        <input type="button" value="Actualizar" class="button1" onclick="location='/inicio/iniciarSesion/medico/actualizarDatos'" />
-                        <input type="button" value="Eliminar" class="button2" onclick="location='/eliminarPaciente'" />
+
+                        <input type="submit" value="Buscar" class="button" onclick="validaciondashboardmedico() ">
+
+                        <input type="button" value="Nuevo" class="button" onclick="location='/inicio/iniciarSesion/administrador/registroPaciente'" />
+                        
+                        <input type="button" value="Actualizar" class="button" onclick="location='/inicio/iniciarSesion/administrador/actualizarDatosPaciente'" />
+
+                        <input type="button" value="Eliminar" class="button" onclick="location='/inicio/iniciarSesion/administrador/eliminarPaciente'" />
                     </form>
                 </div>
-            </section>
-            <div class="error">
-                <h2>{{ error }}</h2>
-            </div>
-            <div class="table">
-                <table style="width:100%">
-                    <tr>
-                        {% for item in columnas%}
-                        <th>{{ item }}</th>
+            
+
+                <div class="error">
+                    <h2>{{ error }}</h2>
+                </div>
+                            
+                <div class="table">
+                    <table style="width:100%">
+                        <tr>
+                            {% for item in columnas%}
+                            <th>{{ item }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for paciente in pacientes%}
+                        <tr>
+                            {% for item in paciente %}
+                            <td>{{ item }}</td> 
+                            {% endfor %}
+                        </tr>
                         {% endfor %}
-                    </tr>
-                    {% for paciente in pacientes%}
-                    <tr>
-                        {% for item in paciente%}
-                        <td>{{ item }}</td> 
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        {% for item in coincidencia%}
-                        <td>{{ item }}</td> 
-                        {% endfor %}
-                        <!--{% if cond == true %}
-                        <form action="/eliminarPaciente" method="post">
-                            <button name="eliminarPaciente" type="submit">Eliminar Paciente</button>
-                        </form>
-                        {% endif %}-->
-                    </tr>
-                </table>
-                
-            </div>
+                        <tr>
+                            {% for item in coincidencia%}
+                            <td>{{ item }}</td> 
+                            {% endfor %}
+                            <!--{% if cond == true %}
+                            <form action="/eliminarPaciente" method="post">
+                                <button name="eliminarPaciente" type="submit">Eliminar Paciente</button>
+                            </form>
+                            {% endif %}-->
+                        </tr>
+                    </table>                
+                </div>
+            </section> 
         </div>
         <footer class="page-footer">
             <span>Desarrollado por G38Team5 </span>
