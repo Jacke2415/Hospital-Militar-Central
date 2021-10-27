@@ -106,13 +106,20 @@
         
         <div class="contenedor-historia-clinica">
             <!-- Texto dentro Historia clinica -->
-            <textarea name="historiaclinica" id="textarea" cols="30" rows="10">
+            <textarea name="historiaclinica" id="textarea" cols="20" rows="10">
             Hospital Militar Central
                 
                                     HISTORIA CLINICA
+                                
+            {% for  item in hc1 %}
+            {{ item }}
+            {% endfor %} 
+                                
             </textarea>
-        
-            <input type="submit" name="action" value="Verhistoriaclinica" id="botonhclinica" class="verHistoriaClinica">
+            <label for="">Comentarios Para el Paciente</label>
+            <textarea name="" id="textarea" cols="30" rows="10"></textarea>
+            
+            <input type="submit" name="" id="" value="Guardar Historia Clinica" class="verHistoriaClinica">
         </div>
 
         </section>

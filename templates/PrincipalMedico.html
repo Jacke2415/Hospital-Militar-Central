@@ -103,7 +103,7 @@
                         
                     </div>
         
-                        <table class="datatable">
+                        <table class="datatable" >
                             <thead> 
                                 <tr>
                                     {% for item in columnas %}
@@ -118,8 +118,10 @@
                                 {% for user in encontradas %}
                                 <tr>
                                     {% for  item in user %}
-                                    <td>{{ item }}</td> 
+                                    <td>{{ item }}</td>
                                     {% endfor %} 
+                                    <td> <a href="/inicio/iniciarSesion/medico/Verdetallecita" class="btn">
+                                        <i class="fas fa-search"></i> </td>
                                 </tr>
                                 {% endfor %}
 
@@ -138,12 +140,15 @@
                 
             </div>
         </div>
-        <input type="text" name="detallecita" id="consultaid" class="search-input">
         
-        <input type="button" id="consultaid" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'"  />
     </form>
     <div class="search">
         
+        <form action="" method="POST" >
+            <input type="text" name="detallecita" id="consultaid" class="search-input">
+        
+            <input type="button" id="consultaid" name="action" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'"   />
+        </form>
     </div>
 </body>
 <footer>

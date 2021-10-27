@@ -295,13 +295,28 @@ def ActualizarCitapormedico(Fecha,idcita1):
     con.commit()
 
 def DetallecitaPaciente(idcita1):
-    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
+    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha, CITA.HistoriaClinica from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     response = cursorObj.fetchall()
     return response
 
+def idpaciente(idcita1):
+    strsql = "select Paciente from CITA where IdCita='"+idcita1+"';"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
+
+def HistoriaClinicaMedico(idpaciente):
+    strsql = "select HistoriaClinica from CITA where Paciente='"+idpaciente+"' and HistoriaClinica is not 'null' ;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
 
     
     
