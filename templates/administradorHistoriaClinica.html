@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorHistoriaClinica.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorPaciente.css')}}">
     <title>Dashboard</title>
     <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
 </head>
@@ -219,22 +219,21 @@
 
         </section>
         <div>
+            <h1>Historias Clinicas</h1>
             <!--Aqui va el contenido-->
             <section class="contenedor-formato-tabla">
                 <div class="contenedor">
-                    <h1>Historias Clinicas</h1>
+                    
                     <form action="/inicio/iniciarSesion/administrador/hclinica" method='POST'>
                         <div class="input-contenedor">
                             <i class="fas fa-envelope icon"></i>
-                            <input type="text" name="cedula" placeholder="Cedula a buscar">
+                            <input type="text" name="cedula" placeholder="id de la historia clinica a solicitar">
                         </div>
-                        <input type="submit" value="Buscar" class="button1" onclick="validaciondashboardmedico() ">
-                        <input type="button" value="Nuevo" class="button2" onclick="location='/inicio/iniciarSesion/administrador/medico/registroMedico'" />
-                        <input type="button" value="Actualizar" class="button1" onclick="location=''" />
-                        <input type="button" value="Eliminar" class="button2" onclick="location=''" />
+                        <input type="submit" value="Buscar" class="button" onclick="validaciondashboardmedico() ">
+                        <input type="button" value="Actualizar" class="button" onclick="location=''" />
+                        <input type="button" value="Eliminar" class="button" onclick="location=''" />
                     </form>
                 </div>
-            </section>
             <div class="error">
                 <h2>{{ error }}</h2>
             </div>
@@ -260,8 +259,8 @@
                     </tr>
                     {% endfor %}
                   </table>
-                  
-            </div>
+                </div>
+            </section>
         </div>
         <footer class="page-footer">
             <span>Desarrollado por G38Team5 </span>

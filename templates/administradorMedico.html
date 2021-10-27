@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorMedico.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/administradorPaciente.css')}}">
     <title>Dashboard</title>
     <link rel="icon" href="{{url_for('static', filename = 'img/favicon.png')}}">
 </head>
@@ -234,7 +234,6 @@
                         <input type="button" value="Eliminar" class="button" onclick="location='/inicio/iniciarSesion/administrador/eliminarMedico'" />
                     </form>
                 </div>
-            </section>
             <div class="error">
                 <h2>{{ error }}</h2>
             </div>
@@ -263,8 +262,8 @@
                         {% endif %}-->
                     </tr>
                 </table>
-                
             </div>
+        </section>
         </div>
         <footer class="page-footer">
             <span>Desarrollado por G38Team5 </span>

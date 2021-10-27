@@ -634,25 +634,38 @@
 }
 
 .contenedor-formato-tabla .contenedor{
-    border-bottom: solid 1px var(--dt-border-color);
+    margin-bottom: 3%;
     padding: var(--dt-padding);
-    display: flex;
+    display:flex;
     align-items: baseline;
 }
-
+.contenedor-formato-tabla .table{
+    width: 80%;
+    height: 500px;
+    margin:auto;  
+    overflow-x: scroll;
+}
 .contenedor-formato-tabla .table th{
     font-weight: bolder;
-    text-align: left;
-    border-bottom: solid 1px var(--dt-border-color);
+    font-size: medium;
+    text-align: center;
+    table-layout: fixed;
+    border: solid 2px var(--dt-border-color);
+    
 }
 
 .contenedor-formato-tabla .table td{
-    border-bottom: solid 1px var(--dt-border-color);
+    border: solid 2px var(--dt-border-color);
+    text-align: center;
+    font-size: medium;
     width: auto;
+    table-layout: fixed;
+    height: auto;
+    
 }
 
 .contenedor-formato-tabla .table tbody tr:nth-child(even){
-    background-color: #b9b9b8;
+    background-color: #afc8d4;
 }
 
 .contenedor-formato-tabla .table tbody tr:hover{
@@ -677,3 +690,4 @@ input[type="password"]{
     width: 100%;
     padding: 10px;
     border: none;
+}
