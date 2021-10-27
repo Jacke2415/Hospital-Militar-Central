@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, session, url_for, redirect
 import db
 from werkzeug.security import check_password_hash
 
+#------------------FUNCIONES GLOBALES Y UTILES-------------------
+
 app = Flask(__name__)
 app.secret_key = 'team5'
 
@@ -31,6 +33,9 @@ def name_user(id):
     cedula = encontrado[0][7]
     return [name, cedula]
 
+#------------------ RUTEO DE LA PAGINA ---------------------------
+#-------------CON SUS RESPECTIVAS FUNCIONES-----------------------
+
 @app.route("/")
 def inicio():
     return render_template("Principal.html")
@@ -39,37 +44,10 @@ def inicio():
 def principal():
     return render_template("Principal.html")
 
-@app.route("/inicio/registro", methods = ['POST', 'GET'])
-def registro():
-    if request.method == 'GET':
-        return render_template("registrar.html")
-    else:
-        tipo = '1'
-        nombre = request.form['nombre']
-        apellido = request.form['apellido']
-        fechaN = request.form['fechaN']
-        sexo = request.form['sexo']
-        tipoId = request.form['tipoId']
-        cedula = request.form['cedula']
-        direccion = request.form['direccion']
-        telefono = request.form['telefono']
-        correo = request.form['correo']
-        contraseña = request.form['password']
-        encontrado = db.sql_search_user(cedula)
-        if len(encontrado)>0:
-            error = f'El número de identificación {cedula} que se desea registrar ya se encuentra en nuestra base de datos'
-            href = '/inicio/iniciarSesion'
-            link = 'Iniciar Sesion'                
-            return render_template('registrar.html', href = href, error = error, link = link)
-        else:
-            especialidad = None
-            consultorio = None
-            db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
-            error = f'Tú registro ha sido exitoso si deseas iniciar sesión'
-            href = '/inicio/iniciarSesion'
-            link = 'Iniciar Sesión'
-            return render_template('registrar.html', href = href, error = error, link = link)
-        
+@app.route("/inicio/busqueda", methods = ['POST', 'GET'])
+def busqueda():
+    return render_template("busqueda.html")
+
 @app.route("/inicio/iniciarSesion", methods = ['POST', 'GET'])
 def iniciarSesion():
     if request.method == 'GET':
@@ -104,9 +82,38 @@ def iniciarSesion():
             link = 'registrate'            
             return render_template('login.html', href = href, error = error, link = link)
 
-@app.route("/inicio/busqueda", methods = ['POST', 'GET'])
-def busqueda():
-    return render_template("busqueda.html")
+#-----------------------PACIENTE----------------------------------
+
+@app.route("/inicio/registro", methods = ['POST', 'GET'])
+def registro():
+    if request.method == 'GET':
+        return render_template("registrar.html")
+    else:
+        tipo = '1'
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        fechaN = request.form['fechaN']
+        sexo = request.form['sexo']
+        tipoId = request.form['tipoId']
+        cedula = request.form['cedula']
+        direccion = request.form['direccion']
+        telefono = request.form['telefono']
+        correo = request.form['correo']
+        contraseña = request.form['password']
+        encontrado = db.sql_search_user(cedula)
+        if len(encontrado)>0:
+            error = f'El número de identificación {cedula} que se desea registrar ya se encuentra en nuestra base de datos'
+            href = '/inicio/iniciarSesion'
+            link = 'Iniciar Sesion'                
+            return render_template('registrar.html', href = href, error = error, link = link)
+        else:
+            especialidad = None
+            consultorio = None
+            db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
+            error = f'Tú registro ha sido exitoso si deseas puedes'
+            href = '/inicio/iniciarSesion'
+            link = 'Iniciar Sesión'
+            return render_template('registrar.html', href = href, error = error, link = link)
 
 @app.route("/inicio/iniciarSesion/Paciente", methods = ['GET', 'POST'])
 def iniciarSesionPaciente():
@@ -174,14 +181,17 @@ def SolicitarCita():
 @app.route("/inicio/iniciarSesion/Paciente/Cancelarcita", methods = ['GET','POST'])
 def Cancelarcita():
     cedula = cedula_init
+    nameButton = 'Regresar'
+    nameButton1 = 'Cancelar Cita'
+    href = '/inicio/iniciarSesion/Paciente'
     if request.method=='GET':
-        return render_template("CancelarCita.html",cedula=cedula)
+        return render_template("CancelarCita.html",cedula=cedula, nameButton=nameButton, href = href, nameButton1 = nameButton1)
     else:
         idcita=request.form['idcita']
         estado='Cancelada'
         db.sql_actualizarestadocita(idcita,estado)
         Mensaje = "Su cita ha Sido Cancelada Exitosamente"
-        return render_template("CancelarCita.html",cedula=cedula, Mensaje=Mensaje)
+        return render_template("CancelarCita.html",cedula=cedula, nameButton=nameButton, href = href, nameButton1 = nameButton1, Mensaje = Mensaje)
 
 @app.route("/inicio/iniciarSesion/medico", methods=['POST', 'GET'])
 def iniciarSesionMedico():
@@ -216,8 +226,8 @@ def iniciarSesionMedico():
             
         return render_template("principalMedico.html", user=user(),encontradas1=encontradas1,columnas=columnas)
 
-@app.route("/inicio/iniciarSesion/actualizarDatos", methods = ['GET', 'POST'])
-def actualizarDatos():
+@app.route("/inicio/iniciarSesion/medico/actualizarDatos", methods = ['GET', 'POST'])
+def actualizarDatosMedico():
     if request.method == 'GET':
         return render_template("actualizarDatosMedico.html")
     else:
@@ -250,8 +260,7 @@ def actualizarDatos():
             return render_template('actualizarDatosMedico.html', href = href, href1 = href1, error = error, error1 = error1, link = link, link1 = link1)
 
 @app.route("/inicio/iniciarSesion/medico/Verdetallecita", methods=['POST', 'GET'])
-def verDetalleMedico():
-   
+def verDetalleMedico():   
     if request.method == 'GET':
         pa=db.DetallecitaPaciente(str(idcita1))
         if len(pa)>0:
@@ -334,6 +343,8 @@ def medicocancelacita():
             }
         return render_template("detallecitamedico.html", idcita1=idcita1,Mensaje=Mensaje, detallecitap=detallecitap)
 
+#---------------------ADMINITRADOR-------------------------------
+
 @app.route("/inicio/iniciarSesion/administrador")
 def administrador():
     return render_template("administrador.html", user = user(cedula_init))
@@ -367,6 +378,8 @@ def administradorPaciente():
             error = f'El usuario con la identificacion {cedula_a_buscar_paciente} no se encuentra registrado '
             return render_template("administradorPaciente.html", user=user(cedula_init), error = error)
 
+#--------------------------ADMINISTRADOR PACIENTE-----------------
+
 @app.route("/inicio/iniciarSesion/administrador/registroPaciente", methods = ['POST', 'GET'])
 def registroPaciente():
     if request.method == 'GET':
@@ -385,18 +398,14 @@ def registroPaciente():
         contraseña = request.form['password']
         encontrado = db.sql_search_user(cedula)
         if len(encontrado)>0:
-            error = f'El número de identificación {cedula} que se desea registrar ya se encuentra en nuestra base de datos'
-            href = '/inicio/iniciarSesion/administrador/paciente'
-            link = 'Regresar'                
-            return render_template('registrar.html', error = error, link = link)
+            error = f'El número de identificación {cedula} del paciente que se desea registrar, ya se encuentra en nuestra base de datos'
+            return render_template('administradorPaciente.html', user = user(cedula_init), error = error)
         else:
             especialidad = None
             consultorio = None
             db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
             error = f'El registro del paciente con número de identificación {cedula} ha sido exitoso'
-            href = '/inicio/iniciarSesion/administrador/paciente'
-            link = 'Regresar'
-            return render_template('registrar.html', href = href, error = error, link = link)
+            return render_template('administradorPaciente.html', user = user(cedula_init), error = error)
 
 @app.route("/inicio/iniciarSesion/administrador/actualizarDatosPaciente", methods = ['GET', 'POST'])
 def actualizarDatosPaciente():
@@ -431,7 +440,7 @@ def eliminarPaciente():
     error = f'El paciente con cédula {cedula_eliminar} fue elminado exitosamente'
     return render_template("administradorPaciente.html", user=user(cedula_init), error = error)
 
-#--------------------------------------------
+#-----------------------ADMINISTRADOR MEDICO----------------------
 
 @app.route("/inicio/iniciarSesion/administrador/medico",methods=['POST', 'GET'])
 def administradorMedico():
@@ -446,7 +455,7 @@ def administradorMedico():
     dbmedicos = db.getMedicos()
     for row in dbmedicos:
         medicos.append(row)
-    app.logger.info(medicos[1][3])
+    #app.logger.info(medicos[1][3])
     if request.method == 'GET':
         return render_template("administradorMedico.html", user=user(cedula_init), columnas=columnas,medicos=medicos)
     else:
@@ -463,8 +472,35 @@ def administradorMedico():
             error = f'El usuario con la identificacion {cedula_a_buscar_medico} no se encuentra registrado '
             return render_template("administradorMedico.html", user = user(cedula_init), error = error)
 
+@app.route("/inicio/iniciarSesion/administrador/medico/registroMedico", methods = ['GET', 'POST'])
+def registroMedico():
+    if request.method == 'GET':
+        return render_template("registroMedico.html")
+    else:
+        tipo = '2'
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        fechaN = request.form['fechaN']
+        sexo = request.form['sexo']
+        tipoId = request.form['tipoId']
+        cedula = request.form['cedula']
+        especialidad = request.form['especialidad']
+        consultorio = request.form['nconsultorio']
+        direccion = request.form['direccion']
+        telefono = request.form['telefono']
+        correo = request.form['correo']
+        contraseña = request.form['password']
+        encontrado = db.sql_search_user(cedula)
+        if len(encontrado)>0:
+            error = f'El medico con número de identificación {cedula} que desea registrar ya se encuentra en nuestra base de datos'
+            return render_template("administradorMedico.html", error = error)
+        else:
+            db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
+            error = f'El médico con número de identificación {cedula} ha sido registrado exitosamente'
+            return render_template("administradorMedico.html", user = user(cedula_init), error = error)  
+
 @app.route("/inicio/iniciarSesion/administrador/actualizarDatosMedico", methods = ['GET', 'POST'])
-def actualizarDatosMedico():
+def actualizarDatosMedicoAdminitrador():
     if request.method == 'GET':
         return render_template("actualizarDatosMedico.html")
     else:
@@ -495,33 +531,8 @@ def eliminarMedico():
     db.sql_delete_user(cedula_eliminar)
     error = f'El médico con cédula {cedula_eliminar} fue elminado exitosamente'
     return render_template("administradorMedico.html", user=user(cedula_init), error = error)
- 
-@app.route("/inicio/iniciarSesion/administrador/medico/registroMedico", methods = ['GET', 'POST'])
-def registroMedico():
-    if request.method == 'GET':
-        return render_template("registroMedico.html")
-    else:
-        tipo = '2'
-        nombre = request.form['nombre']
-        apellido = request.form['apellido']
-        fechaN = request.form['fechaN']
-        sexo = request.form['sexo']
-        tipoId = request.form['tipoId']
-        cedula = request.form['cedula']
-        especialidad = request.form['especialidad']
-        consultorio = request.form['nconsultorio']
-        direccion = request.form['direccion']
-        telefono = request.form['telefono']
-        correo = request.form['correo']
-        contraseña = request.form['password']
-        encontrado = db.sql_search_user(cedula)
-        if len(encontrado)>0:
-            error = 'El medico que desea registrar ya se encuentra en nuestra base de datos'
-            return render_template("administradorMedico.html", error = error)
-        else:
-            db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
-            error = 'El medico ha sido registrado exitosamente'
-            return render_template("administradorMedico.html", user = user(cedula_init), error = error)  
+
+#----------------------ADMINISTRADOR CITAS-------------------
 
 @app.route("/inicio/iniciarSesion/administrador/citas",methods=['POST', 'GET'])
 def administradorCitas():
@@ -555,11 +566,12 @@ def administradorCitas():
         return render_template("administradorCitas.html", user = user(cedula_init), columnas=columnas,citas=citas)
     else:
         coincidencias = []
-        cedula = request.form['cedula']
-        app.logger.info(cedula)
+        global cedula_a_buscar_citas
+        cedula_a_buscar_citas = request.form['cedula']
+        app.logger.info(cedula_a_buscar_citas)
         # cedula_medico_cita = request.form['medico']
         # fecha_cita = request.form['fecha']
-        busqueda_cedula = db.sql_search_citas_admin(cedula)
+        busqueda_cedula = db.sql_search_citas_admin(cedula_a_buscar_citas)
         app.logger.info(busqueda_cedula)
         if len(busqueda_cedula)>0:
             cond = True
@@ -567,8 +579,58 @@ def administradorCitas():
                 coincidencias.append(row)
             return render_template("administradorCitas.html", user = user(cedula_init), coincidencias=coincidencias, columnas=columnas,cond=cond)
         else:
-            error = f'El usuario con la identificacion {cedula} no se encuentra registrado '
+            error = f'El usuario con la identificacion {cedula_a_buscar_citas} no se encuentra registrado '
             return render_template("administradorCitas.html", user= user(cedula_init), error = error)
+
+@app.route("/inicio/iniciarSesion/administrador/solicitarcita", methods = ['POST', 'GET'])
+def solicitarCitaAdministrador():
+    medico=[]
+    espe=[]
+    if request.method=='GET':
+        especialidad= db.get_especialidad() 
+        if len(especialidad)>0:
+            for i in range(len(especialidad)):
+                espe.append(especialidad[i][0])
+        medicos= db.get_Medicos1() 
+        if len(medicos)>0:
+            for i in range(len(medicos)):
+                medico.append(medicos[i][1]+'  '+medicos[i][0])
+                print(medico)
+        return render_template("SolicitarCita.html", espe=espe, medico=medico)
+    else:
+        me=request.form['medico']
+        m1=me.split()
+        m2=m1[0]
+        m3=m1[1]
+        pacient=db.Obteneridpaciente(cedula_a_buscar_citas)
+        medic=db.Obteneridmedico(m2,m3)
+        fecha=request.form['fecha']
+        hora="7:00 am"
+        historiaclinica="null"
+        calificacion="null"
+        comentarios="null"
+        estado="Pendiente"
+        paciente=(str(pacient[0][0]))
+        medico=(str(medic[0][0]))
+        db.sql_CrearCita(paciente, medico, fecha, hora, historiaclinica,calificacion, comentarios, estado)
+        error = f"la cita con el médico {name_user(medico)[0]} del paciente con número de identificación {cedula_a_buscar_citas} ha Sido Creada Exitosamente"
+        return render_template("administradorCitas.html", user= user(cedula_init), error = error)
+
+@app.route("/inicio/iniciarSesion/administrador/eliminarCitaAdministrador", methods = ['GET','POST'])
+def cancelarCitaAdministrador():
+    cedula = cedula_a_buscar_citas
+    nameButton = 'Regresar'
+    nameButton1 = 'Eliminar Cita'
+    href = '/inicio/iniciarSesion/administrador/citas'
+    if request.method=='GET':
+        return render_template("CancelarCita.html",cedula=cedula, nameButton = nameButton, href = href, nameButton1 = nameButton1)
+    else:
+        idcita=request.form['idcita']
+        db.sql_eliminarCita(idcita)
+        error = f"La cita con id {idcita} ha sido eliminada de nuestra base de datos exitosamente"
+        return render_template("administradorCitas.html", user= user(cedula_init), error = error)
+            
+
 
 @app.route("/inicio/iniciarSesion/administrador/hclinica",methods=['POST', 'GET'])
 def administradordHClinica():

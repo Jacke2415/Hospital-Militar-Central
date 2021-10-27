@@ -41,6 +41,13 @@ def sql_delete_user(cedula):
     con.commit()
     #con.close()
 
+def sql_eliminarCita(idcita):
+    strsql = 'delete from CITA where IdCita = ?',(idcita,) 
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(*strsql)
+    con.commit()
+    
 #listo
 def sql_search_user(cedula):
     strsql = 'select * from Usuarios where NumeroIdentificacion = ?',(cedula,)
@@ -191,6 +198,7 @@ def sql_search_citaspacientes(cedula):
     cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
+
 #listo
 def sql_search_Historialcitas(cedula):
     strsql = 'select Idcita,Medico,Fecha,Hora,Estado from CITA JOIN Usuarios  ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion = ? and CITA.Estado != ?',(cedula,'Pendiente',)
@@ -262,7 +270,7 @@ def llenar_cita(cedula_paciente,_cedula_medico,fecha,hora,historia,calificacion,
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+    #con.close()
 def Obteneridpaciente(cedula):
     strsql = "select IdUsuario from Usuarios where NumeroIdentificacion='"+cedula+"';"
     con =sql_connection()
@@ -285,7 +293,7 @@ def sql_CrearCita(paciente, medico, fecha, hora, historiaclinica,calificacion, c
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def ActualizarCitapormedico(Fecha,idcita1):
     strsql = "update CITA set Fecha='"+Fecha+"' where IdCita='"+idcita1+"'"
