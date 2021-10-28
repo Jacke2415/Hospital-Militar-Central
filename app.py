@@ -238,8 +238,6 @@ def iniciarSesionMedico():
     else:    
         Finicial=request.form['fechainicial']
         Ffinal=request.form['fechafinal']
-        global idcita1
-        idcita1=request.form['detallecita']
         columnas = []
         busqueda_columnas= db.get_columnas_Cita1()
         for i in busqueda_columnas:
@@ -440,6 +438,7 @@ def medicoguardahistoriaC():
         for row in hc:
             hc1.append('Fecha'+' '+row[1]+' '+row[0])
     return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap,hc1=hc1,Mensaje=Mensaje)       
+
 
 
     
