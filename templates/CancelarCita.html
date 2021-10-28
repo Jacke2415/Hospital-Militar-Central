@@ -14,16 +14,13 @@
 	
 
 </head>  
-<body>
-
-    
+<body>    
     <nav>
-        <a href="/inicio/iniciarSesion/Paciente" class="nav-link">Regresar</a>
+        <a href="/logout" class="nav-link">Logout</a>
         <a href="/inicio/busqueda" class="btn">
             <i class="fas fa-search"></i>
         </a>
-    </nav>
-    
+    </nav>    
 
     <form action=""
     method="POST"
@@ -32,27 +29,19 @@
     onsubmit="return validarRegistro()">
         
         <h1>Cancelar Cita</h1>
-
             <li>Para Cancelar su cita debe ingresa El Numero de la Cita</li>
             <p></p>
             <div class="contenedor">
-            
-                                              
+                                                
                 <div class="input-contenedor">
                     <i class="fas fa-file-alt icon"></i>
                     <input type="text" name = "idcita" placeholder="No id Cita">
                 </div>
-
-                
-
-                <p>
-
-                    <input type="submit" value="Cancelar Cita" class="button">
-                    {{ Mensaje }}
-                </p>
-               
+                <div>
+                    <p><input type="submit" value="{{ nameButton1 }}" class="button">{{ Mensaje }}</p>
+                    <p><input type="" value="{{ nameButton }}" class="button" onclick = "location='{{ href }}'"/></p>
+                </div> 
             </div>
-
     </form>
 
 <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 

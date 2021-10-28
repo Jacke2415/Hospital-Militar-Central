@@ -6,7 +6,8 @@ from werkzeug.security import generate_password_hash
 def sql_connection():
     try:
         if 'con' not in g:
-            g.con = sqlite3.connect("HospitalMilitar.db")
+            #g.con = sqlite3.connect("/home/jackenamor/Hospital-Militar-Central/hospitalMilitar.db")
+            g.con = sqlite3.connect("hospitalMilitar.db")
         return g.con
     except Error:
         print(Error)
@@ -23,7 +24,7 @@ def sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoDocumento, cedula, 
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo,contraseña, cedulae):
     strsql = 'update Usuarios set TipoUsuario = ?, Nombre = ?, Apellido = ?, FechaNacimiento =?, Sexo =?, TipoIdentificacion = ?, NumeroIdentificacion = ?, Especialidad = ?, Consultorio = ?, Direccion = ?, Telefono = ?, Correo = ?, Contraseña = ? where NumeroIdentificacion = ?', (tipo, nombre, apellido, fechaN,sexo, tipoDocumento, cedula, especialidad, consultorio, direccion, telefono, correo, generate_password_hash(contraseña), cedulae,)
@@ -41,14 +42,13 @@ def sql_delete_user(cedula):
     con.commit()
     #con.close()
 
-def sql_delete_paciente(cedula):
-    strsql = 'DELETE FROM Usuarios WHERE NumeroIdentificacion=?', (cedula,)
+def sql_eliminarCita(idcita):
+    strsql = 'delete from CITA where IdCita = ?',(idcita,) 
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
     con.commit()
-    print("usuario eliminado")
-    con.close()
+    
 #listo
 def sql_search_user(cedula):
     strsql = 'select * from Usuarios where NumeroIdentificacion = ?',(cedula,)
@@ -65,7 +65,6 @@ def sql_search_name_user(id):
     cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
-
 #listo
 def get_columns_usuario():
     strsql = 'select * from Usuarios'
@@ -117,7 +116,7 @@ def getHClinica():
 
 # Obtener Historia CLinica del lado del admin
 def sql_search_Hclinica(cedula_usuario):
-    strsql = 'select HClinica.IdHistoriaC, Usuarios.NumeroIdentificacion, CITA.HistoriaClinica from HClinica, Usuarios, CITA where Usuarios.NumeroIdentificacion=? and',(cedula_usuario)
+    strsql = 'SELECT HClinica.IdHistoriaC,HClinica.Paciente, HClinica.Hclinica from HClinica JOIN Usuarios on Hclinica.Paciente = Usuarios.IdUsuario where Usuarios.NumeroIdentificacion=?',(cedula_usuario,)
     con =sql_connection()
     cursor = con.cursor()
     cursor.execute(*strsql)
@@ -126,10 +125,10 @@ def sql_search_Hclinica(cedula_usuario):
     
 # Obtener citas del lado del admin
 def sql_search_citas_admin(cedula_usuario):
-    strsql = "select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= '"+cedula_usuario+"' ;"
+    strsql = "select Idcita,Paciente,Medico,Fecha,Hora,HistoriaClinica,Calificacion,ComentariosCalificacion,Estado from CITA JOIN Usuarios ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion= ?", (cedula_usuario,) 
     con =sql_connection()
     cursor = con.cursor()
-    cursor.execute(strsql)
+    cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
 
@@ -200,6 +199,7 @@ def sql_search_citaspacientes(cedula):
     cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
+
 #listo
 def sql_search_Historialcitas(cedula):
     strsql = 'select Idcita,Medico,Fecha,Hora,Estado from CITA JOIN Usuarios  ON Usuarios.IdUsuario= CITA.Paciente where Usuarios.NumeroIdentificacion = ? and CITA.Estado != ?',(cedula,'Pendiente',)
@@ -271,7 +271,7 @@ def llenar_cita(cedula_paciente,_cedula_medico,fecha,hora,historia,calificacion,
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+    #con.close()
 def Obteneridpaciente(cedula):
     strsql = "select IdUsuario from Usuarios where NumeroIdentificacion='"+cedula+"';"
     con =sql_connection()
@@ -294,7 +294,7 @@ def sql_CrearCita(paciente, medico, fecha, hora, historiaclinica,calificacion, c
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     con.commit()
-    con.close()
+    #con.close()
 
 def ActualizarCitapormedico(Fecha,idcita1):
     strsql = "update CITA set Fecha='"+Fecha+"' where IdCita='"+idcita1+"'"
