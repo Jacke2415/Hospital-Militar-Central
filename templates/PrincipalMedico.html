@@ -20,7 +20,7 @@
     
     <!-- conexion a css -->
    
-    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/perfilmedico.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/estiloPaciente.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/listadecitas.css')}}">
     <script src="{{ url_for('static', filename = '../static/js/perfilmedico.js') }}"></script>
 
@@ -38,22 +38,23 @@
             </a>
         </nav>
     <!-- Nombre del medico y especialidad -->
-        <section class="textos-header">
+       <!-- <section class="textos-header">
             <h1>Perfil Medico</h1>
-        </section>
+        </section> -->
     
-    <!-- Flow del encabezado -->
+    <!-- Flow del encabezado 
         <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
             style="height: 100%; width: 100%;">
             <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
                 style="stroke: none; fill: #fff;"></path>
-        </svg></div>
+        </svg></div>  -->
     
     </header>
     
     <form class="PrincipalMedico" action="" method="POST">
         <div class="contenedor">
             <div class="contenedor-imagen">
+                <h1>Medico:</h1>
                 <h1>{{ user.name }}</h1>
                 <img src="{{ url_for('static', filename = 'img/imagenmedico.jpg') }}">
             </div>
@@ -68,86 +69,57 @@
                 <p>Dirección: {{ user.dir }}</p>
                 <input type="button" value="Actualizar información" class="button" onclick="location='/inicio/iniciarSesion/medico/actualizarDatos'" >
             </div>
-            
-            
+                        
             <section class="contenedor-formato-tabla">
 
-                <div class="datatable-container">
-                    <div class="header-tools">
-                        <div class="tools">
-                            <!-- boton check -->
-                            <ul>
-                                
-                                
-                                <li>
-                                    <p>Fecha Desde</p>
-                                    <button>
-                                        <input type="date" name="fechainicial" id="fechai">
-                                    </button>
-                                </li>
-                                <li>
-                                    <p>Fecha Hasta</p>
-                                    <button>
-                                        <input type="date" name="fechafinal" id="fechaf">
-                                    </button>
-                                </li>
-                                <li>
-                                    <button>
-                                        <button type="submit" name="consultar" onclick="validarfecha()" >Consultar
-                                    </button>
-                                    <input type="text" name="detallecita1" id="consultaid" class="search-input">
-                                </li>
-                               
-                            </ul>
-                               
-                        </div>
+                <!--<div class="datatable-container">-->
+                <div class="contenedor-citas-pendientes">
+                    <!-- boton check -->
+                    <div class="input-contenedor">
+                        <button><p>Fecha Desde</p>
+                        <input type="date" name="fechainicial" id="fechai">
+                        <p>Fecha Hasta</p>
+                        <input type="date" name="fechafinal" id="fechaf"><br><br>
+                        <input type="submit" value="Consultar" name="consultar" onclick="validarfecha()" ></button><br>
+                        <!--<input type="text" name="detallecita1" id="consultaid" class="search-input">-->
+                        <input type="text" name="detallecita" id="inputdetalle" class="">     
+                        <input type="" id="inputdetalle" name="action" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'" /><br><br>
+                    <table class="datatable" >
+                        <thead> 
+                            <tr>
+                                {% for item in columnas %}
+                                <th>{{ item }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
         
-                        
-                    </div>
-        
-                        <table class="datatable" >
-                            <thead> 
-                                <tr>
-                                    {% for item in columnas %}
-                                    <th>{{ item }}</th>
-                                    {% endfor %}
-                                    
-                                </tr>
-                            </thead>
-        
-                            <tbody>
+                        <tbody>
                               
-                                {% for user in encontradas %}
-                                <tr>
-                                    {% for  item in user %}
-                                    <td>{{ item }}</td>
-                                    {% endfor %} 
+                            {% for user in encontradas %}
+                            <tr>
+                                {% for  item in user %}
+                                <td>{{ item }}</td>
+                                {% endfor %} 
                                     
-                                </tr>
-                                {% endfor %}
+                            </tr>
+                            {% endfor %}
 
-                                {% for user in encontradas1 %}
-                                <tr>
-                                    {% for  item in user %}
-                                    <td>{{ item }}</td> 
-                                    {% endfor %} 
-                                </tr>
-                                {% endfor %}
-        
-                                
-                            </tbody>
-                        </table>
-                        
-                
-            </div>
+                            {% for user in encontradas1 %}
+                            <tr>
+                                {% for  item in user %}
+                                <td>{{ item }}</td> 
+                                {% endfor %} 
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
         </div>
-        <input type="text" name="detallecita" id="inputdetalle" class="">    
+        <!--<input type="text" name="detallecita" id="inputdetalle" class="">-->    
     </form>
-    <div class="search">
-        
-        <input type="submit" id="inputdetalle" name="action" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'" />
-        
-    </div>
+    <!--<div class="search">
+        <input type="" id="inputdetalle" name="action" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'" />
+    </div>-->
 </body>
 <footer>
     <div class="contenedor-footer">

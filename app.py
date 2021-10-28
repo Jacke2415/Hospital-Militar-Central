@@ -756,8 +756,15 @@ def administradordHClinica():
                 coincidencias.append(row)
             return render_template("administradorHistoriaClinica.html", user = user(cedula_init), coincidencias=coincidencias, columnas=columnas,cond=cond)
         else:
-            error = f'El usuario con la identificacion {cedula} no se encuentra registrado '
+            error = f'El usuario con la identificacion {cedula} no tiene creada una historia clinica'
             return render_template("administradorHistoriaClinica.html", user = user(cedula_init), error = error)
+
+#------------------- No Funciona ------------------------
+@app.route("/inicio/iniciarSesion/administrador/eliminarhclinica",methods=['POST', 'GET'])
+def eliminarhclinica():
+    db.sql_eliminarHClinica(idUser)
+    error = f"La cita con id {idcita} ha sido eliminada de nuestra base de datos exitosamente"
+    return render_template("administradorCitas.html", user= user(cedula_init), error = error)
 
 @app.route("/inicio/iniciarSesion/administrador/agenda")
 def administradordAgenda():

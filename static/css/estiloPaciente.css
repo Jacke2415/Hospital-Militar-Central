@@ -55,6 +55,19 @@ img{
     border-radius: 5px;
     cursor: pointer;
 }
+.buttonk{
+    margin-top: 2%;
+    margin-left: auto;
+    border: none;
+    width:auto;
+    color: white;
+    font-size: 20px;
+    /*font-weight: bold;*/
+    background:  #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 .button:hover{
     background: cadetblue;
 }

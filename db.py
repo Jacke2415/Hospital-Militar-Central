@@ -6,8 +6,8 @@ from werkzeug.security import generate_password_hash
 def sql_connection():
     try:
         if 'con' not in g:
-            g.con = sqlite3.connect("/home/jackenamor/Hospital-Militar-Central/hospitalMilitar.db")
-            #g.con = sqlite3.connect("hospitalMilitar.db")
+            #g.con = sqlite3.connect("/home/jackenamor/Hospital-Militar-Central/hospitalMilitar.db")
+            g.con = sqlite3.connect("hospitalMilitar.db")
         return g.con
     except Error:
         print(Error)
@@ -44,6 +44,13 @@ def sql_delete_user(cedula):
 
 def sql_eliminarCita(idcita):
     strsql = 'delete from CITA where IdCita = ?',(idcita,) 
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(*strsql)
+    con.commit()
+
+def sql_eliminarHClinica(idHclinica):
+    strsql = 'delete from CITA where IdHistoriC = ?',(idHclinica,) 
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(*strsql)
