@@ -25,53 +25,46 @@
     </nav>
     
 
-    <form action=""
-    method="POST"
-    name="formularioCita"
-    class="formulario-registro"
-    onsubmit="return validarRegistro()">
+    <form action="/inicio/iniciarSesion/Paciente/agregarCalificacion" method="POST" class="formulario-registro">
         
-        <h1>Solicita tu Cita</h1>
+        <h1>Agregar Calificacion</h1>
 
-            <li>Los datos de la cita seran enviados al correo suministrado.</li>
+            <li>Los comentarios seran anonimos y tenidos en cuenta</li>
             <li>Todos los campos son obligatorios.</li>
+            <li>La calificacion debe ser del 1 al 5 donde 1 es POCO satisfecho y 5 es MUY satisfecho.</li>
+            <li>Solo se podran cambiar las citas <span style="color:rgba(22, 62, 241, 0.911)">Aceptadas</span></li> 
+            
             <p></p>
             <div class="contenedor">
                
                 <div class="input">
-                    Especialidad:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="especialidad">
-                    <option value = Ninguno>--Especialidad--                
-                    {% for item in espe%}
-                    <option value="{{ item }}">{{ item }} </option>
-                    {% endfor %}
-                    </select>
-                    
+                    <input name="cita" type="number" style="border-style:solid;" placeholder="Id de la cita a cambiar">
+                </div><br>
+
+                <div class="input">
+                    Calificacion:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="calificacion">
+                        <option value = Ninguno>--Calificacion--                
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        </select>
                 </div><br>
                         
         
                 <div class="input">
-                       
-                    Medico:&nbsp;&nbsp;&nbsp;&nbsp;<select name ="medico">
-                    <option value = Ninguno>--Medico--                
-                        {% for item in medico%}
-                        <option value="{{ item }}">{{ item }} </option>
-                        {% endfor %}
-                    </select>
+                    <h2>Comentarios</h2>
+                    <textarea class="text-area" name="comentario" id="" cols="50" rows="10"></textarea>
                 </div><br>
 
                                
                 <div class="input-contenedor">
-                    <i class="fas fa-file-alt icon"></i>
-                    <input type="date" name = "fecha" placeholder="Fecha Cita">
                 </div>
-
-            
-                <p></p>
-
-                <input type="submit" value="Solicitar Cita" class="button">
+                <input type="submit" value="Agregar comentarios" class="button">
             
             </div>
-        {{ Mensaje }}   
+        <h3 style="color:red">{{ mensaje }}</h3>
     </form>
 
 <script src = "{{ url_for('static', filename = '../static/js/registro.js') }}"></script> 

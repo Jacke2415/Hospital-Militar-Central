@@ -87,6 +87,33 @@
     
                 <input type="submit" value="Solicitar Historia Clínica" class="button">
             </div>
+            <p>
+                
+            </p>
+            <div class="contenedor-historial-citas">
+                <table>
+                    <caption>Citas aceptadas</caption>
+                    <tr>
+                        {% for item in columnas %}
+                        <th>{{ item }}</th>
+                        {% endfor %}
+                    </tr>
+                               
+                    
+                    {% for user in historial %}
+                    {% if user[4] == "Aceptada" %}
+                    <tr>
+                        {% for  item in user %}
+                        <td name="cita-aceptada">{{ item }}</td> 
+                        {% endfor %} 
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+          
+                <input type="" value="Calificar cita" class="button" onclick = 
+                "location='/inicio/iniciarSesion/Paciente/agregarCalificacion'"/>
+            </div>
         </div>
     </form>
 </body>
