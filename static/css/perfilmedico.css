@@ -51,8 +51,8 @@ img{
     height: 700px;
 }
 #textarea{
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
 }
 .button{
     margin-top: 2%;
@@ -401,7 +401,6 @@ header .textos-header{
 }
 
 
-
 /* footer */
 
 footer{
@@ -429,8 +428,8 @@ footer{
 #AceptarCancelar
     {
         position: relative;
-        right: 500px;
-        top: 590px;
+        right: 330px;
+        top: -120px;
 
     }
 .buttonk{
@@ -442,7 +441,7 @@ footer{
         padding: 15px 20px;
         border-radius: 5px;
         cursor: pointer;
-        margin-bottom: 10px
+       
 }
 .content-foo{
     text-align: center;
@@ -466,6 +465,11 @@ footer{
     color: #9e9797;
 }
 
+#inputdetalle{
+    position:absolute;
+    right:250px;
+    top: 620px;
+}
 @media screen and (max-width:1000px){
     header{
         background-position: center;
@@ -484,7 +488,6 @@ footer{
     .imagen-about-us{
         width: auto;
     }
-
 
     /* Footer */
 
@@ -516,5 +519,7 @@ footer{
     {
         font-size: 20px;
     }
+
+    
     
 }

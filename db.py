@@ -57,6 +57,15 @@ def sql_search_user(cedula):
     cursor.execute(*strsql)
     response = cursor.fetchall()
     return response
+
+def sql_search_name_user(id):
+    strsql = 'select * from Usuarios where IdUsuario = ?',(id,)
+    con =sql_connection()
+    cursor = con.cursor()
+    cursor.execute(*strsql)
+    response = cursor.fetchall()
+    return response
+
 #listo
 def get_columns_usuario():
     strsql = 'select * from Usuarios'
@@ -295,13 +304,57 @@ def ActualizarCitapormedico(Fecha,idcita1):
     con.commit()
 
 def DetallecitaPaciente(idcita1):
-    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
+    strsql = "select Nombre, Apellido, NumeroIdentificacion, Sexo, FechaNacimiento, CITA.Fecha, CITA.HistoriaClinica from Usuarios JOIN CITA ON Usuarios.IdUsuario= CITA.Paciente where CITA.IdCita= '"+idcita1+"' ;"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(strsql)
     response = cursorObj.fetchall()
     return response
 
+def idpaciente(idcita1):
+    strsql = "select Paciente from CITA where IdCita='"+idcita1+"';"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
 
+def HistoriaClinicaMedico(idpaciente):
+    strsql = "select HistoriaClinica, Fecha from CITA where Paciente='"+idpaciente+"' and HistoriaClinica is not 'null' order by Fecha DESC;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
+
+def GuardarHistoriaClinica(Hclinica,idcita1):
+    strsql = "update CITA SET HistoriaClinica='"+Hclinica+"' where IdCita='"+idcita1+"'; "
+    con = sql_connection()    
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    con.commit()
+
+def checkCitasConId(id):
+    strsql = "select * from CITA where IdCita= '"+id+"' ;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
+    
+def agregarCalificacionCita(calificacion,comentarios,idcita):
+    strsql = "update CITA set Calificacion='"+calificacion+"',ComentariosCalificacion='"+comentarios+"' where IdCita='"+idcita+"'"
+    con = sql_connection()    
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    con.commit()
+
+def getStatusCita(id):
+    strsql = "select Estado from CITA where IdCita= '"+id+"' ;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(strsql)
+    response = cursorObj.fetchall()
+    return response
     
     

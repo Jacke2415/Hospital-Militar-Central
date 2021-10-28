@@ -31,8 +31,8 @@
 
     <!-- inicio y señal de busqueda -->
         <nav>
-            <a href="../principal/index.html" class="btn">Inicio</a>
-            <a href="../Buscar/busquedaf.html" class="btn">
+            <a href="/inicio/iniciarSesion/medico" class="btn">Regresar</a>
+            <a href="/inicio/busqueda" class="btn">
                 <i class="fas fa-search"></i>
             </a>
         </nav>
@@ -105,14 +105,23 @@
         </form>
         
         <div class="contenedor-historia-clinica">
+            <h4>Historia Clinica del Paciente</h4>
             <!-- Texto dentro Historia clinica -->
             <textarea name="historiaclinica" id="textarea" cols="30" rows="10">
             Hospital Militar Central
-                
-                                    HISTORIA CLINICA
+            {% for  item in hc1 %}
+            {{ item }} 
+            {% endfor %} 
             </textarea>
-        
-            <input type="submit" name="action" value="Verhistoriaclinica" id="botonhclinica" class="verHistoriaClinica">
+        </div>
+        <div class="contenedor-historia-clinica">
+            <h4>Detalles Del Paciente</h4>
+            <form id="" action="/inicio/iniciarSesion/medico/Verdetallecita/GuardarHClinica" method="post" >
+                <textarea name="GuardaHistoria" id="textarea" cols="30" rows="10">
+                    
+                </textarea>
+                <input type="submit" name="" id="" value="Guardar Historia Clinica" class="verHistoriaClinica" >
+            </form>
         </div>
 
         </section>

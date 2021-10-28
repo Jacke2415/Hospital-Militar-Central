@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="{{url_for('static', filename = '../static/css/listadecitas.css')}}">
     <script src="{{ url_for('static', filename = '../static/js/perfilmedico.js') }}"></script>
 
-
 </head>
 
 <body>
@@ -33,6 +32,7 @@
     <!-- inicio y señal de busqueda -->
         <nav>
             <a href="/inicio" class="btn">Inicio</a>
+            <a href="/logout" class="btn">logout</a>
             <a href="/inicio/busqueda" class="btn">
                 <i class="fas fa-search"></i>
             </a>
@@ -66,7 +66,7 @@
                 <p>Edad: {{ user.edad }}</p>
                 <p>Teléfono: {{ user.tel }}</p>
                 <p>Dirección: {{ user.dir }}</p>
-                <input type="button" value="Actualizar información" class="button" onclick="location='/inicio/iniciarSesion/medico/actualizarDatos'" >
+                <input type="button" value="Actualizar información" class="button" onclick="location='/inicio/iniciarSesion/actualizarDatos'" >
             </div>
             
             
@@ -95,15 +95,17 @@
                                     <button>
                                         <button type="submit" name="consultar" onclick="validarfecha()" >Consultar
                                     </button>
+                                    <input type="text" name="detallecita1" id="consultaid" class="search-input">
                                 </li>
+                               
                             </ul>
-                            
+                               
                         </div>
         
                         
                     </div>
         
-                        <table class="datatable">
+                        <table class="datatable" >
                             <thead> 
                                 <tr>
                                     {% for item in columnas %}
@@ -118,8 +120,9 @@
                                 {% for user in encontradas %}
                                 <tr>
                                     {% for  item in user %}
-                                    <td>{{ item }}</td> 
+                                    <td>{{ item }}</td>
                                     {% endfor %} 
+                                    
                                 </tr>
                                 {% endfor %}
 
@@ -138,11 +141,11 @@
                 
             </div>
         </div>
-        <input type="text" name="detallecita" id="consultaid" class="search-input">
-        
-        <input type="button" id="consultaid" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'"  />
+        <input type="text" name="detallecita" id="inputdetalle" class="">    
     </form>
     <div class="search">
+        
+        <input type="submit" id="inputdetalle" name="action" value="Ver detalle Cita" class="button" onclick="location='/inicio/iniciarSesion/medico/Verdetallecita'" />
         
     </div>
 </body>

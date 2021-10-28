@@ -8,6 +8,14 @@ from werkzeug.security import check_password_hash
 app = Flask(__name__)
 app.secret_key = 'team5'
 
+
+def name_user(id):
+    encontrado = db.sql_search_name_user(id)
+    name = encontrado[0][2] + ' ' + encontrado[0][3]
+    cedula = encontrado[0][7]
+    return [name, cedula]
+
+
 @app.route("/")
 def inicio():
     return render_template("Principal.html")
@@ -117,19 +125,18 @@ def iniciarSesionPaciente():
     busqueda_columnas= db.get_columnas_Cita()
     for i in busqueda_columnas:
         columnas.append(f'{i}')
-    #if request.method == 'GET':
     encontradas=[]
     historial=[]
     citas= db.sql_search_citaspacientes (cedula_init)
-    print(type(citas[0][1]))
     medico=db.get_Medicos1()
     if len(citas)>0:
         for row in citas:
             encontradas.append(row)
         app.logger.info(encontradas)
+        #return render_template("principalPaciente.html", user = user(cedula_init), encontradas=encontradas, columnas=columnas)
     else:
         error = "Usuario no Tiene Citas"
-        return render_template("principalPaciente.html", user=user, error = error)
+        #return render_template("principalPaciente.html", user = user(cedula_init), error = error)
     historialcitas=db.sql_search_Historialcitas(cedula_init)
     if len(historialcitas)>0:
         for row in historialcitas:
@@ -137,7 +144,7 @@ def iniciarSesionPaciente():
     
     else:
         error = "Usuario no Tiene Citas"
-        return render_template("principalPaciente.html", user = user(cedula_init), error = error)
+        #return render_template("principalPaciente.html", user = user(cedula_init), error = error)
     return render_template("principalPaciente.html", user=user(cedula_init), cedula=cedula_init, encontradas=encontradas, columnas=columnas, 
     historial=historial)
 
@@ -191,6 +198,28 @@ def Cancelarcita():
         Mensaje = "Su cita ha Sido Cancelada Exitosamente"
         return render_template("CancelarCita.html",cedula=cedula, Mensaje=Mensaje)
 
+@app.route("/inicio/iniciarSesion/Paciente/agregarCalificacion", methods = ['POST', 'GET'])
+def agregarCalificacion():
+    if request.method=='GET':
+        return render_template("agregarCalificacion.html")
+    else:
+        numero_id_cita= request.form['cita']
+        calificacion = request.form['calificacion']
+        comentario = request.form['comentario']
+        coincidencias = db.checkCitasConId(numero_id_cita)
+        estado = db.getStatusCita(numero_id_cita)
+        app.logger.info(estado)
+        if len(coincidencias)>0 and not estado[0] == "Aceptada":
+            mensaje = "Cita encontrada pero no esta 'Aceptada'"
+        if len(coincidencias)>0:
+            if estado[0][0] == "Aceptada":
+                mensaje = "Cita encontrada y atualizada"
+                app.logger.info("entro")
+                db.agregarCalificacionCita(calificacion,comentario,numero_id_cita)
+        else:
+            mensaje = "No se encontro cita correspondiente a esa ID"
+        return render_template("agregarCalificacion.html" , mensaje=mensaje)
+
 @app.route("/inicio/iniciarSesion/medico", methods=['POST', 'GET'])
 def iniciarSesionMedico():
     cedula = cedula_init
@@ -207,7 +236,6 @@ def iniciarSesionMedico():
             app.logger.info(encontradas)
         return render_template("principalMedico.html", user=user(cedula_init),encontradas=encontradas,columnas=columnas)
     else:    
-      
         Finicial=request.form['fechainicial']
         Ffinal=request.form['fechafinal']
         global idcita1
@@ -222,8 +250,7 @@ def iniciarSesionMedico():
             for row in citas:
                 encontradas1.append(row)
             app.logger.info(encontradas1)
-            
-        return render_template("principalMedico.html", user=user(),encontradas1=encontradas1,columnas=columnas)
+        return render_template("principalMedico.html", user=user(cedula_init),encontradas1=encontradas1,columnas=columnas)
 
 @app.route("/inicio/iniciarSesion/actualizarDatos", methods = ['GET', 'POST'])
 def actualizarDatos():
@@ -265,17 +292,22 @@ def actualizarDatos():
                     error = f'La actualización de datos del médico con número de identificacion {cedula} ha sido exitosa'
                     return render_template('administradorMedico.html', user = user(cedula_init), error = error)
             
-                elif cedula_a_buscar_paciente == cedula:
-                    tipo = '1'
-                    db.sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña, cedula_a_buscar_paciente)
-                    error = f'La actualización de datos del paciente con número de identificacion {cedula} ha sido exitosa'
-                    return render_template('administradorPaciente.html', user = user(cedula_init), error = error)          
+                else:
+                    if  cedula_a_buscar_paciente == cedula:
+                        tipo = '1'
+                        db.sql_edit_user(tipo, nombre, apellido, fechaN, sexo, tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña, cedula_a_buscar_paciente)
+                        error = f'La actualización de datos del paciente con número de identificacion {cedula} ha sido exitosa'
+                        return render_template('administradorPaciente.html', user = user(cedula_init), error = error)          
 
 @app.route("/inicio/iniciarSesion/medico/Verdetallecita", methods=['POST', 'GET'])
 def verDetalleMedico():
    
     if request.method == 'GET':
+        
+        print(idcita1)
+        #idcita1='9'
         pa=db.DetallecitaPaciente(str(idcita1))
+        
         if len(pa)>0:
             today = datetime.datetime.today()
             fechaN = pa[0][4]
@@ -287,9 +319,16 @@ def verDetalleMedico():
                 'sexo':pa[0][3],
                 'edad':today.year - fechaN.year - ((today.month, today.day) < (fechaN.month, fechaN.day)),
                 'fecha':pa[0][5],
-                'hora':'7:00 am'
+                'hora':'7:00 am',
                 }
-            return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap)
+            idp=db.idpaciente(str(idcita1))
+            idp1=str(idp[0][0])
+            hc=db.HistoriaClinicaMedico(idp1)
+            hc1=[]
+            for row in hc:
+                hc1.append('Fecha'+' '+row[1]+' '+row[0])
+            return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap,hc1=hc1)
+
     else:
         fechao=request.form['FechaC']
         db.ActualizarCitapormedico(fechao,str(idcita1))
@@ -307,14 +346,19 @@ def verDetalleMedico():
                 'edad':today.year - fechaN.year - ((today.month, today.day) < (fechaN.month, fechaN.day)),
                 'fecha':pa[0][5],
                 'hora':'7:00 am'
+                
                 }
-            return render_template("detallecitamedico.html", idcita1=idcita1,detallecitap=detallecitap,Mensaje=Mensaje)
+            idp=db.idpaciente(idcita1)
+            idp1=str(idp[0][0])
+            hc=db.HistoriaClinicaMedico(idp1)
+            hc1=[]
+            for row in hc:
+                hc1.append('Fecha'+' '+row[1]+' '+row[0])
+            
+            return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap,hc1=hc1,Mensaje=Mensaje)
 
 @app.route("/inicio/iniciarSesion/medico/Verdetallecita/aceptarcita", methods=['POST'])  
 def medicoaceptacita():
-    cedula = cedula_init
-    print(idcita1)
-     
     estado='Aceptada'
     db.sql_actualizarestadocita(str(idcita1),estado)
     Mensaje='La cita ha Sido Aceptada'
@@ -332,14 +376,17 @@ def medicoaceptacita():
             'fecha':pa[0][5],
             'hora':'7:00 am'
             }
-        return render_template("detallecitamedico.html", idcita1=idcita1,Mensaje=Mensaje, detallecitap=detallecitap)
+        idp=db.idpaciente(idcita1)
+        idp1=str(idp[0][0])
+        hc=db.HistoriaClinicaMedico(idp1)
+        hc1=[]
+        for row in hc:
+            hc1.append('Fecha'+' '+row[1]+' '+row[0])
+        return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap,hc1=hc1,Mensaje=Mensaje)
+        
 
 @app.route("/inicio/iniciarSesion/medico/Verdetallecita/cancelarcita", methods=['POST'])  
 def medicocancelacita():
-    cedula = cedula_init
-    
-   
-     
     estado='Cancelada'
     db.sql_actualizarestadocita(str(idcita1),estado)
     Mensaje='La cita ha Sido Cancelada'
@@ -357,7 +404,43 @@ def medicocancelacita():
             'fecha':pa[0][5],
             'hora':'7:00 am'
             }
-        return render_template("detallecitamedico.html", idcita1=idcita1,Mensaje=Mensaje, detallecitap=detallecitap)
+        idp=db.idpaciente(idcita1)
+        idp1=str(idp[0][0])
+        hc=db.HistoriaClinicaMedico(idp1)
+        hc1=[]
+        for row in hc:
+            hc1.append('Fecha'+' '+row[1]+' '+row[0])
+        return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap,hc1=hc1,Mensaje=Mensaje)
+        
+
+@app.route("/inicio/iniciarSesion/medico/Verdetallecita/GuardarHClinica", methods=['POST'])  
+def medicoguardahistoriaC():
+    Hclinica=request.form['GuardaHistoria']
+    print(Hclinica)
+    db.GuardarHistoriaClinica(Hclinica,str(idcita1))
+    Mensaje='Los Datos han sido guardados Exitosamente'
+    pa=db.DetallecitaPaciente(str(idcita1))
+    if len(pa)>0:
+        today = datetime.datetime.today()
+        fechaN = pa[0][4]
+        fechaN = datetime.datetime.strptime(fechaN, "%Y-%m-%d")
+        nombre=pa[0][0]+' '+pa[0][1]
+        detallecitap={
+            'nombre':pa[0][0]+' '+pa[0][1],
+            'cedula':pa[0][2],
+            'sexo':pa[0][3],
+            'edad':today.year - fechaN.year - ((today.month, today.day) < (fechaN.month, fechaN.day)),
+            'fecha':pa[0][5],
+            'hora':'7:00 am'
+            }
+        idp=db.idpaciente(idcita1)
+        idp1=str(idp[0][0])
+        hc=db.HistoriaClinicaMedico(idp1)
+        hc1=[]
+        for row in hc:
+            hc1.append('Fecha'+' '+row[1]+' '+row[0])
+    return render_template("detallecitamedico.html", idcita1=idcita1, detallecitap=detallecitap,hc1=hc1,Mensaje=Mensaje)       
+
 
     
 
@@ -463,11 +546,11 @@ def registroMedico():
         encontrado = db.sql_search_user(cedula)
         if len(encontrado)>0:
             error = 'El medico que desea registrar ya se encuentra en nuestra base de datos'
-            return render_template("administradorMedico.html", error = error)
+            return render_template("administradorMedico.html",user=user(cedula_init), error = error)
         else:
             db.sql_insert_user(tipo, nombre, apellido, fechaN, sexo,tipoId, cedula, especialidad, consultorio, direccion, telefono, correo, contraseña)
             error = 'El medico ha sido registrado exitosamente'
-            return render_template("administradorMedico.html", error = error)  
+            return render_template("administradorMedico.html", user=user(cedula_init), error = error)  
 
 @app.route("/inicio/iniciarSesion/administrador/citas",methods=['POST', 'GET'])
 def administradorCitas():
