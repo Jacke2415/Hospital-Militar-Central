@@ -6,8 +6,8 @@ from werkzeug.security import generate_password_hash
 def sql_connection():
     try:
         if 'con' not in g:
-            #g.con = sqlite3.connect("/home/jackenamor/Hospital-Militar-Central/hospitalMilitar.db")
-            g.con = sqlite3.connect("hospitalMilitar.db")
+            g.con = sqlite3.connect("/home/jackenamor/Hospital-Militar-Central/hospitalMilitar.db")
+            #g.con = sqlite3.connect("hospitalMilitar.db")
         return g.con
     except Error:
         print(Error)
